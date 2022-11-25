@@ -12,7 +12,8 @@ class View{
     public function generate($data){
         $content = $this->generateFile($this->_file, $data);
 
-        $view = $this->generateFile('views/template.php', array('t' => $this->_t,
+        $view = $this->generateFile('views/template.php', array(
+        't' => $this->_t,
         'description' => $content));
 
         echo $view;

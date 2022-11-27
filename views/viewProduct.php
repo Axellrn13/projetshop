@@ -43,11 +43,13 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div>     
     </div>
 </section>
 
+
 <section class="py-5 text-center">
+<h1 class="text-center display-5">Avis</h1>
 <div class="container mt-5 mb-5">
     <div class="row g-2 justify-content-center">
         <?php foreach ($reviews as $review): ?>

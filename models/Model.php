@@ -50,4 +50,17 @@ abstract class Model{
         return $var;
         $req->closeCursor();
     }
+
+    protected function getLogin($table, $obj,$username){
+        $this->getBdd();
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table.' where username ='.$username);
+        $req->execute();
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+        $var[] = new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+
+    }
 }

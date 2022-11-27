@@ -62,6 +62,7 @@
     <p class="col-md-4 mb-0 text-muted">© ISIWeb4Shop 2022-2023</p>
     <ul class="nav col-md-4 justify-content-end">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Accueil</a></li>
+      <li class="nav-item"><a href="https://github.com/Axellrn13/projetshop" class="nav-link px-2 text-muted">Github</a></li>
       <li class="nav-item"><a href="https://www.dropbox.com/home/ISI-WEB%2022-23/ISI-WEB%20TP%20Final%202022-2023?preview=ISIWEB-PHP+Projet+shopping+Bag+2022-2023.pdf" class="nav-link px-2 text-muted">Sujet</a></li>
     </ul>
   </footer>

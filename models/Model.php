@@ -20,7 +20,29 @@ abstract class Model{
     //FONCTION QUI RETOURNE TOUT LES CHAMPS D'UNE TABLE
     protected function getAll($table, $obj){
         $var=[];
-        $req=self::$_bdd->prepare('select * from '.$table.' order by 1 desc');
+        $req=self::$_bdd->prepare('select * from '.$table);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $var[]=new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
+    protected function getValue($table, $obj, $id){
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table.' where id='.$id);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $var[]=new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
+    protected function getValueReview($table, $obj, $id){
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table.' where id_product='.$id);
         $req->execute();
         while($data = $req->fetch(PDO::FETCH_ASSOC)){
             $var[]=new $obj($data);

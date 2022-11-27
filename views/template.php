@@ -26,13 +26,13 @@
                         <a class="nav-link" href="<?= URL ?>">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accueil?categorie=1">Fruits secs</a>
+                        <a class="nav-link" href="accueil&categorie=1">Fruits secs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accueil?categorie=2">Biscuits</a>
+                        <a class="nav-link" href="accueil&categorie=2">Biscuits</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accueil?categorie=3">Boissons</a>
+                        <a class="nav-link" href="accueil&categorie=3">Boissons</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -40,7 +40,7 @@
                         <a class="nav-link" href="javascript:void(0)">Panier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Se connecter</a>
+                        <a class="nav-link" href="login">Se connecter</a>
                     </li>
                 </ul>
             </div>
@@ -56,5 +56,15 @@
             crossorigin="anonymous"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
 </body>
+
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">© ISIWeb4Shop 2022-2023</p>
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Accueil</a></li>
+      <li class="nav-item"><a href="https://www.dropbox.com/home/ISI-WEB%2022-23/ISI-WEB%20TP%20Final%202022-2023?preview=ISIWEB-PHP+Projet+shopping+Bag+2022-2023.pdf" class="nav-link px-2 text-muted">Sujet</a></li>
+    </ul>
+  </footer>
+</div>
 
 </html>

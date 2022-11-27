@@ -4,6 +4,7 @@ require_once('views/View.php');
 class ControllerAccueil{
     private $_articleManager;
     private $_categorieManager;
+    private $_reviewManager;
     private $_view;
 
     public function __construct($url)
@@ -11,6 +12,10 @@ class ControllerAccueil{
         if(isset($url) && count( array($url) ) > 1)
         {
             throw new Exception('Page introuvable');
+        }
+        elseif(isset($_GET['id']))
+        {
+            $this->product();
         }
         else
         {
@@ -32,14 +37,20 @@ class ControllerAccueil{
 
     private function product(){
         $this->_articleManager = new ArticleManager;
-        $this->_categorieManager = new CategorieManager;
-        $articles=$this->_articleManager->getArticles();
-        $categories=$this->_categorieManager->getCategories();
+        $this->_reviewManager = new ReviewManager;
+        $articles=$this->_articleManager->getArticleSpe($_GET['id']);
+        $reviews=$this->_reviewManager->getReview($_GET['id']);
         
         $this->_view = new View('Product');
         $this->_view->generate(array(
-        'articles' => $articles,    
-        'categories' => $categories));
+            'articles' => $articles,    
+            'reviews' => $reviews));
+    }
+
+    private function login(){  
+        $this->_view = new View('Login');
+        //$this->_view->generate(array(
+        //'articles' => $articles));
     }
 
 }

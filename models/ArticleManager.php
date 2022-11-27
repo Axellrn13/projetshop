@@ -4,5 +4,10 @@ class ArticleManager extends Model{
         $this->getBdd();
         return $this->getAll('products', 'Article');
     }
+
+    public function getArticleSpe($id){
+        $this->getBdd();
+        return $this->getValue('products', 'Article', $id);
+    }
 }
 ?>

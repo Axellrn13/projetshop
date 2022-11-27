@@ -78,7 +78,7 @@ class Article {
     public function quantity(){
         return $this->_quantity;
     }
-    public function catId(){
+    public function cat_id(){
         return $this->_cat_id;
     }
 }

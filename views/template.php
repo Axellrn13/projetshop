@@ -40,7 +40,14 @@
                         <a class="nav-link" href="javascript:void(0)">Panier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login">Se connecter</a>
+                        <a class="nav-link" href="login">
+                            <?php 
+                            if(isset($_SESSION['nom'])){
+                                echo $_SESSION['nom'];
+                            } else {
+                                echo "Se connecter";
+                            }
+                            ?></a>
                     </li>
                 </ul>
             </div>

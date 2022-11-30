@@ -21,7 +21,7 @@
               </form>
             </div>
             <div>
-              <p class="mb-0">Vous n'avez pas de compte? <a href="#!" class="text-white-50 fw-bold">Créer un compte</a>
+              <p class="mb-0">Vous n'avez pas de compte? <a href="register" class="text-white-50 fw-bold">Créer un compte</a>
               </p>
             </div>
           </div>

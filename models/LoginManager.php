@@ -1,8 +1,8 @@
 <?php 
 class LoginManager extends Model{
-    public function getLog($username){
+    public function getLog(){
         $this->getBdd();
-        return $this->getLogin('logins', 'Login', $username);
+        return $this->getAll('logins', 'Login');
     }
 }
 ?>

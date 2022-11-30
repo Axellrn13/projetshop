@@ -1,7 +1,7 @@
 <?php 
 
 require_once('views/View.php');
-class ControllerLogin{
+class ControllerRegister{
     private $_view;
 
     public function __construct($url)
@@ -12,12 +12,12 @@ class ControllerLogin{
         }
         else
         {
-            $this->login();
+            $this->register();
         }
     }
 
-    private function login(){  
-        $this->_view = new View('Login');
+    private function register(){  
+        $this->_view = new View('Register');
         $this->_view->generate(array());
     }
 

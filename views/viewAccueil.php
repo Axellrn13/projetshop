@@ -1,7 +1,8 @@
 <?php 
-session_start();
 $nom;
-$_SESSION['nom'] = $_POST['nom'];
+if(isset($_POST['nom'])){
+    $_SESSION['nom'] = $_POST['nom'];
+}
 ?>
 
 <section class="py-5">

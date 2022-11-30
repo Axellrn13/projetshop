@@ -40,14 +40,17 @@
                         <a class="nav-link" href="javascript:void(0)">Panier</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login">
-                            <?php 
-                            if(isset($_SESSION['nom'])){
-                                echo $_SESSION['nom'];
-                            } else {
-                                echo "Se connecter";
-                            }
+                        <?php 
+                            if(isset($_SESSION['nom'])){ ?>
+                            <a class="nav-link" href="google.com"><?= $_SESSION['nom'];?>
+                            <?php
+                            } else { ?>
+                                <a class="nav-link" href="login">Se connecter
+                            <?php } 
                             ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)">Se déconnecter</a>
                     </li>
                 </ul>
             </div>

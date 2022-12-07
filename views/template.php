@@ -49,9 +49,13 @@
                             <?php } 
                             ?></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Se déconnecter</a>
+                    <?php 
+                        if(isset($_SESSION['nom'])){ ?>
+                            <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Se déconnecter</a>
                     </li>
+                       <?php }?>
+                    
                 </ul>
             </div>
         </div>

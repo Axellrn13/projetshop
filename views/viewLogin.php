@@ -1,4 +1,30 @@
-<?php $this->_t = 'Se connecter'; ?>
+<?php $this->_t = 'Se connecter'; 
+foreach ($logins as $login):
+    print_r($login);
+endforeach;
+
+if(isset($_POST['submit']))
+{
+  foreach ($logins as $login):
+    if($login->username() == $_POST['username'])
+    {
+      if($login->password() == $_POST['mdp'])
+      {
+        $_SESSION['username'] = $login->username();
+        $_SESSION['id'] = $login->id();
+        $_SESSION['customer_id'] = $login->customerid();
+        header("Location: accueil");
+      }
+    }
+  endforeach;
+}
+
+if(isset($_SESSION['username']))
+{
+  echo $_SESSION['username'];
+}
+?>
+
 
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
@@ -8,7 +34,7 @@
           <div class="card-body p-5 text-center">
             <div class="mb-md-5 mt-md-4 pb-5">
               <h2 class="fw-bold mb-2 text-uppercase">Se connecter</h2>
-              <form method="POST" action="accueil">
+              <form method="POST" action="">
                 <div class="mb-3">
                   <input type="text" name="username" class="form-control" autocomplete="off" id="username">
                   <label for="username" class="form-label">Pseudo</label>

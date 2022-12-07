@@ -3,6 +3,8 @@
 require_once('views/View.php');
 class ControllerRegister{
     private $_view;
+    private $_loginManager;
+    private $_customerManager;
 
     public function __construct($url)
     {
@@ -17,8 +19,15 @@ class ControllerRegister{
     }
 
     private function register(){  
+        $this->_loginManager = new LoginManager;
+        $this->_customerManager = new CustomerManager;
+        $logins=$this->_loginManager->getLog();
+        $customers=$this->_customerManager->getCustomers();
+
         $this->_view = new View('Register');
-        $this->_view->generate(array());
+        $this->_view->generate(array(
+            'logins' => $logins,
+            'customers' => $customers));
     }
 
 }

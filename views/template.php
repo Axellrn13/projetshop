@@ -40,8 +40,8 @@
                     </li>
                     <li class="nav-item">
                         <?php
-                        if (isset($_SESSION['nom'])) { ?>
-                            <a class="nav-link" href="google.com"><?= $_SESSION['nom']; ?>
+                        if (isset($_SESSION['username'])) { ?>
+                            <a class="nav-link" href="google.com"><?= $_SESSION['username']; ?>
                             <?php
                         } else { ?>
                                 <a class="nav-link" href="login">Se connecter
@@ -49,7 +49,7 @@
                                 ?></a>
                     </li>
                     <?php
-                    if (isset($_SESSION['nom'])) { ?>
+                    if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="logout.php">Se déconnecter</a>
                         </li>

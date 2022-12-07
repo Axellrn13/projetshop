@@ -1,4 +1,15 @@
-<?php $this->_t = 'Créer un compte'; ?>
+<?php $this->_t = 'Créer un compte'; 
+foreach ($customers as $customer) {
+  print_r($customer);
+}
+?><br><br><br><?php
+foreach ($logins as $login) {
+  print_r($login);
+}
+
+
+
+?>
 
 <!-- Section: Design Block -->
 <section class="text-center">
@@ -12,8 +23,12 @@
       <div class="row d-flex justify-content-center">
         <div class="col-lg-7">
           <h2 class="fw-bold mb-5 text-uppercase">Créer un compte</h2>
-          <form action="accueil" method="post" autocomplete="off">
+          <form action="" method="post" autocomplete="off">
             <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="form-outline mb-4">
+              <input autocomplete="off" name="username" type="email" class="form-control" />
+              <label class="form-label"  for="form3Example3">Pseudo</label>
+            </div>  
             <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="form-outline">

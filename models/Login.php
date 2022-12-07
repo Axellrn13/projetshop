@@ -54,5 +54,8 @@ class Login {
     public function username(){
         return $this->_username;
     }
+    public function password(){
+        return $this->_password;
+    }
 }
 ?>

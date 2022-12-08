@@ -1,17 +1,24 @@
-<?php $this->_t = 'Créer un compte'; 
-foreach ($customers as $customer) {
-  print_r($customer);
-}
-?><br><br><br><?php
-foreach ($logins as $login) {
-  print_r($login);
-}
+<?php 
 
+if(isset($_POST['submit']))
+{
+  foreach ($logins as $login):
+    if($login->username() != $_POST['username'])
+    {
+      $_SESSION['username'] = $_POST['username'];
+      $_SESSION['nom'] = $_POST['nom'];
+      $_SESSION['prenom'] = $_POST['prenom'];
+      $_SESSION['codepost'] = $_POST['codepost'];
+      $_SESSION['tel'] = $_POST['tel'];
+      $_SESSION['mail'] = $_POST['mail'];
+      $_SESSION['mdp'] = md5($_POST['mdp']);
+      header("Location: register&creation");
+    }
+  endforeach;
+}
 
 
 ?>
-
-<!-- Section: Design Block -->
 <section class="text-center">
   <!-- Background image -->
   <div class="p-3 bg-image"></div>
@@ -23,10 +30,10 @@ foreach ($logins as $login) {
       <div class="row d-flex justify-content-center">
         <div class="col-lg-7">
           <h2 class="fw-bold mb-5 text-uppercase">Créer un compte</h2>
-          <form action="" method="post" autocomplete="off">
+          <form action="" method="POST" autocomplete="off">
             <!-- 2 column grid layout with text inputs for the first and last names -->
             <div class="form-outline mb-4">
-              <input autocomplete="off" name="username" type="email" class="form-control" />
+              <input autocomplete="off" name="username" type="text" class="form-control" />
               <label class="form-label"  for="form3Example3">Pseudo</label>
             </div>  
             <div class="row">
@@ -73,7 +80,7 @@ foreach ($logins as $login) {
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-outline-light btn-lg px-5">
+            <button name="submit" type="submit" class="btn btn-outline-light btn-lg px-5">
                 Créer un compte
             </button>
           </form>

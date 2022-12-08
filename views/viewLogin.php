@@ -8,7 +8,7 @@ if(isset($_POST['submit']))
   foreach ($logins as $login):
     if($login->username() == $_POST['username'])
     {
-      if($login->password() == $_POST['mdp'])
+      if($login->password() == md5($_POST['mdp']))
       {
         $_SESSION['username'] = $login->username();
         $_SESSION['id'] = $login->id();

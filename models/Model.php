@@ -42,10 +42,10 @@ abstract class Model{
 
     protected function createUser($username, $forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email, $password){
         $req=self::$_bdd->prepare("insert into customers (forname, surname, add1, add2, add3, postcode, phone, email) 
-        values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-        SET @customerId = (select max(id) from customers);
+        values (?, ?, ?, ?, ?, ?, ?, ?);
+        SET @id = (select max(id) from customers);
         insert into logins (customer_id,username,password) 
-        values (@customerId, ?, ?);");
+        values (@id, ?, ?);");
         $req->execute(array($forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$username,$password));
         $req->closeCursor();
     }

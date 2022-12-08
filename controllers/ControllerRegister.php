@@ -1,5 +1,6 @@
 <?php 
 
+
 require_once('views/View.php');
 class ControllerRegister{
     private $_view;
@@ -12,6 +13,10 @@ class ControllerRegister{
         {
             throw new Exception('Page introuvable');
         }
+        elseif(isset($_GET['creation']))
+        {
+            $this->registerAccount();
+        }
         else
         {
             $this->register();
@@ -20,16 +25,21 @@ class ControllerRegister{
 
     private function register(){  
         $this->_loginManager = new LoginManager;
-        $this->_customerManager = new CustomerManager;
         $logins=$this->_loginManager->getLog();
-        $customers=$this->_customerManager->getCustomers();
 
         $this->_view = new View('Register');
         $this->_view->generate(array(
-            'logins' => $logins,
-            'customers' => $customers));
+            'logins' => $logins
+        ));
     }
 
+    private function registerAccount(){  
+        $this->_customerManager = new CustomerManager;
+        $this->_customerManager->createCustomer();
+
+        $this->_view = new View('Register');
+        $this->_view->generate(array());
+    }
 }
 
 ?>

@@ -1,10 +1,16 @@
-<?php 
+<?php
+$this->_t = 'Créer un compte';
 
 if(isset($_POST['submit']))
 {
+  $alreadyRegistered = false;
   foreach ($logins as $login):
-    if($login->username() != $_POST['username'])
+    if($login->username() == $_POST['username'])
     {
+      $alreadyRegistered = true;
+    }
+  endforeach;
+  if (!$alreadyRegistered) {
       $_SESSION['username'] = $_POST['username'];
       $_SESSION['nom'] = $_POST['nom'];
       $_SESSION['prenom'] = $_POST['prenom'];
@@ -13,8 +19,7 @@ if(isset($_POST['submit']))
       $_SESSION['mail'] = $_POST['mail'];
       $_SESSION['mdp'] = md5($_POST['mdp']);
       header("Location: register&creation");
-    }
-  endforeach;
+  }
 }
 
 

@@ -48,6 +48,7 @@ abstract class Model{
         values (@id, ?, ?);");
         $req->execute(array($forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$username,$password));
         $req->closeCursor();
+        header("Location: accueil");
     }
 
     protected function getValueReview($table, $obj, $id){

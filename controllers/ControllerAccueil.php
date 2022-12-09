@@ -47,12 +47,6 @@ class ControllerAccueil{
             'reviews' => $reviews));
     }
 
-    private function login(){  
-        $this->_view = new View('Login');
-        //$this->_view->generate(array(
-        //'articles' => $articles));
-    }
-
 }
 
 ?>

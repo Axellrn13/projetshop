@@ -1,26 +1,28 @@
-<?php $this->_t = 'Se connecter'; 
+<?php $this->_t = 'Se connecter';
 foreach ($logins as $login):
-    print_r($login);
+  print_r($login);
 endforeach;
 
-if(isset($_POST['submit']))
-{
+if (isset($_POST['submit'])) {
   foreach ($logins as $login):
-    if($login->username() == $_POST['username'])
-    {
-      if($login->password() == md5($_POST['mdp']))
-      {
+    if ($login->username() == $_POST['username']) {
+      if ($login->password() == md5($_POST['mdp'])) {
         $_SESSION['username'] = $login->username();
         $_SESSION['id'] = $login->id();
         $_SESSION['customer_id'] = $login->customerid();
         header("Location: accueil");
+      } else { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Mot de passe incorrect !</strong> Veuillez réessayer.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php
       }
     }
   endforeach;
 }
 
-if(isset($_SESSION['username']))
-{
+if (isset($_SESSION['username'])) {
   echo $_SESSION['username'];
 }
 ?>
@@ -47,7 +49,8 @@ if(isset($_SESSION['username']))
               </form>
             </div>
             <div>
-              <p class="mb-0">Vous n'avez pas de compte? <a href="register" class="text-white-50 fw-bold">Créer un compte</a>
+              <p class="mb-0">Vous n'avez pas de compte? <a href="register" class="text-white-50 fw-bold">Créer un
+                  compte</a>
               </p>
             </div>
           </div>

@@ -48,7 +48,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#">Vos commandes</a></li>
-                            <li><a class="dropdown-item" href="#">Votre compte</a></li>
+                            <li><a class="dropdown-item" href="account">Votre compte</a></li>
                         </ul>
                     </li>
                     <?php

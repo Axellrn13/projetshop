@@ -4,5 +4,9 @@ class LoginManager extends Model{
         $this->getBdd();
         return $this->getAll('logins', 'Login');
     }
+    public function getSpeLog(){
+        $this->getBdd();
+        return $this->getSpeValue('logins', 'Login','id',$_SESSION['id']);
+    }
 }
 ?>

@@ -56,7 +56,7 @@ class Customer {
     public function setAdd3($add3){
         $this->_add3 = $add3;
     }
-    public function setCostcode($postcode){
+    public function setPostcode($postcode){
         $this->_postcode = $postcode;
     }
     public function setPhone($phone){

@@ -41,8 +41,8 @@ abstract class Model{
     }
 
     protected function createUser($username, $forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email, $password){
-        $req=self::$_bdd->prepare("insert into customers (forname, surname, add1, add2, add3, postcode, phone, email) 
-        values (?, ?, ?, ?, ?, ?, ?, ?);
+        $req=self::$_bdd->prepare("insert into customers (forname, surname, add1, add2, add3, postcode, phone, email,registered) 
+        values (?, ?, ?, ?, ?, ?, ?, ?,1);
         SET @id = (select max(id) from customers);
         insert into logins (customer_id,username,password) 
         values (@id, ?, ?);");
@@ -51,9 +51,26 @@ abstract class Model{
         header("Location: accueil");
     }
 
+    protected function updateUser($username, $forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$id){
+        $req=self::$_bdd->prepare("update customers set forname=?, surname=?, add1=?, add2=?, add3=?, postcode=?, phone=?, email=? where id=?;
+        update logins set username=? where customer_id=?;");
+        $req->execute(array($forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$id,$username,$id));
+        $req->closeCursor();
+    }
     protected function getValueReview($table, $obj, $id){
         $var=[];
         $req=self::$_bdd->prepare('select * from '.$table.' where id_product='.$id);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $var[]=new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
+    protected function getSpeValue($table, $obj,$id_name, $id){
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table.' where '.$id_name.'='.$id);
         $req->execute();
         while($data = $req->fetch(PDO::FETCH_ASSOC)){
             $var[]=new $obj($data);

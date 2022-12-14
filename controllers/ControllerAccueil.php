@@ -17,6 +17,10 @@ class ControllerAccueil{
         {
             $this->product();
         }
+        elseif(isset($_GET['categorie']))
+        {
+            $this->articleCat();
+        }
         else
         {
             $this->articles();
@@ -27,6 +31,18 @@ class ControllerAccueil{
         $this->_articleManager = new ArticleManager;
         $this->_categorieManager = new CategorieManager;
         $articles=$this->_articleManager->getArticles();
+        $categories=$this->_categorieManager->getCategories();
+        
+        $this->_view = new View('Accueil');
+        $this->_view->generate(array(
+        'articles' => $articles,    
+        'categories' => $categories));
+    }
+
+    private function articleCat(){
+        $this->_articleManager = new ArticleManager;
+        $this->_categorieManager = new CategorieManager;
+        $articles=$this->_articleManager->getArticleCat($_GET['categorie']);
         $categories=$this->_categorieManager->getCategories();
         
         $this->_view = new View('Accueil');

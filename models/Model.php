@@ -29,6 +29,17 @@ abstract class Model{
         $req->closeCursor();
     }
 
+    protected function getAllCat($table, $obj, $cat){
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table. ' where cat_id='.$cat);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $var[]=new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
     protected function getValue($table, $obj, $id){
         $var=[];
         $req=self::$_bdd->prepare('select * from '.$table.' where id='.$id);

@@ -4,6 +4,11 @@ class ArticleManager extends Model{
         $this->getBdd();
         return $this->getAll('products', 'Article');
     }
+    
+    public function getArticleCat($cat){
+        $this->getBdd();
+        return $this->getAllCat('products', 'Article',$cat);
+    }
 
     public function getArticleSpe($id){
         $this->getBdd();

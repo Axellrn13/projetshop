@@ -9,5 +9,10 @@ class ArticleManager extends Model{
         $this->getBdd();
         return $this->getValue('products', 'Article', $id);
     }
+
+    public function getArticleCat($cat){
+        $this->getBdd();
+        return $this->getAllCat('products', 'Article',$cat);
+    }
 }
 ?>

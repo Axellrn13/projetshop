@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="form-outline mb-4">
                             <input autocomplete="off" name="username" type="text" class="form-control"
-                                value="<?= $logins[0]->username(); ?>"></input>
+                                value="<?= $logins[0]->username(); ?>" readonly></input>
                             <label class="form-label" for="form3Example3">Pseudo</label>
                         </div>
                         <div class="row">

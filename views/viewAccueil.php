@@ -15,12 +15,21 @@ if (isset($_POST['submit'])) {
                     <a href="accueil&id=<?= $article->id(); ?>"><img class="card-img-top" src="images/<?= $article->image(); ?>"/></a>
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <h5 class="fw-bolder"><?= $article->name(); ?></h5>
+                            <?php if($article->quantity() <= 0 ) { ?>
+                                <div class="text-center">
+                                    <h5 class="text-muted text-decoration-line-through fw-bolder"><?= $article->name(); ?></h5>
+                                </div>
+                            <?php } else { ?>
+                                <div class="text-center">
+                                    <h5 class="fw-bolder"><?= $article->name(); ?></h5>
+                                </div>
+                            <?php }?>
+                            
                             <?= $article->price(); ?>€
                         </div>
                         <?php if($article->quantity() <= 0 ) { ?>
                             <div class="text-center">
-                                <span class='text-muted text-decoration-line-through'>Rupture de stock</span>
+                                <span class='text-danger'>Rupture de stock</span>
                             </div>
                         <?php } ?>
                     </div>

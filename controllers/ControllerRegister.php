@@ -39,6 +39,7 @@ class ControllerRegister{
 
         $this->_view = new View('Register');
         $this->_view->generate(array());
+        
     }
 }
 

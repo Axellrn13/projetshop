@@ -1,11 +1,8 @@
 <?php $this->_t = 'Se connecter';
-foreach ($logins as $login):
-  print_r($login);
-endforeach;
 
 if (isset($_POST['submit'])) {
   foreach ($logins as $login):
-    if ($login->username() == $_POST['username']) {
+    if ($login->username() == $_POST['username2']) {
       if ($login->password() == md5($_POST['mdp'])) {
         $_SESSION['username'] = $login->username();
         $_SESSION['id'] = $login->id();
@@ -21,10 +18,6 @@ if (isset($_POST['submit'])) {
     }
   endforeach;
 }
-
-if (isset($_SESSION['username'])) {
-  echo $_SESSION['username'];
-}
 ?>
 
 
@@ -38,7 +31,7 @@ if (isset($_SESSION['username'])) {
               <h2 class="fw-bold mb-2 text-uppercase">Se connecter</h2>
               <form method="POST" action="">
                 <div class="mb-3">
-                  <input type="text" name="username" class="form-control" autocomplete="off" id="username">
+                  <input type="text" name="username2" class="form-control" autocomplete="off" id="username2">
                   <label for="username" class="form-label">Pseudo</label>
                 </div>
                 <div class="mb-3">

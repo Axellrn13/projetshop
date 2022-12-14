@@ -26,13 +26,13 @@
                         <a class="nav-link" href="<?= URL ?>">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accueil&categorie=1">Fruits secs</a>
+                        <a class="nav-link" href="accueil&categorie=1">Boissons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="accueil&categorie=2">Biscuits</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accueil&categorie=3">Boissons</a>
+                        <a class="nav-link" href="accueil&categorie=3">Fruits secs</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

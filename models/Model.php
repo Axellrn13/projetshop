@@ -48,7 +48,18 @@ abstract class Model{
         values (@id, ?, ?);");
         $req->execute(array($forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$username,$password));
         $req->closeCursor();
-        header("Location: accueil");
+        header("Location: logout.php");
+    }
+
+    protected function getAllCat($table, $obj, $cat){
+        $var=[];
+        $req=self::$_bdd->prepare('select * from '.$table. ' where cat_id='.$cat);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC)){
+            $var[]=new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
     }
 
     protected function updateUser($username, $forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$id){

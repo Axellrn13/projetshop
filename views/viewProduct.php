@@ -23,7 +23,7 @@
                     echo "</div>";
                 } else {
                     echo "<div class='fs-5 mb-5 d-flex flex-row'>";
-                    echo "<span class='text-muted text-decoration-line-through'>Rupture de stock</span>";
+                    echo "<span class='text-danger'>Rupture de stock</span>";
                     echo "</div>";
                     $rupture = true;
                 }
@@ -34,7 +34,7 @@
 
                 <div class="d-flex">
                     <?php if (!$rupture) { ?>
-                        <input class="form-control text-center me-3 disabled" id="inputQuantity" min="0" max="<?= $articles[0]->quantity(); ?>" type="number" value="1"
+                        <input class="form-control text-center me-3 disabled" id="inputQuantity" onkeypress="return false" min="0" max="<?= $articles[0]->quantity(); ?>" type="number" value="1"
                         style="max-width: 4rem" />
                     <?php } ?>
                     <button class="btn btn-outline-dark flex-shrink-0 <?php if ($rupture) echo "disabled" ?>" type="button">

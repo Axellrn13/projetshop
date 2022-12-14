@@ -47,7 +47,6 @@ class ControllerAccount{
             'logins' => $logins,
             'customers' => $customers));
     }
-
 }
 
 ?>

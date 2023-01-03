@@ -5,6 +5,7 @@ class ControllerAccount{
     private $_view;
     private $_loginManager;
     private $_customerManager;
+    private $_orderManager;
 
     public function __construct($url)
     {
@@ -15,6 +16,10 @@ class ControllerAccount{
         elseif(isset($_GET['update']))
         {
             $this->updateAccount();
+        }
+        elseif(isset($_GET['order']))
+        {
+            $this->accountOrder();
         }
         else
         {
@@ -33,6 +38,21 @@ class ControllerAccount{
         $this->_view->generate(array(
             'logins' => $logins,
             'customers' => $customers));
+    }
+
+    private function accountOrder(){  
+        $this->_loginManager = new LoginManager;
+        $this->_customerManager = new CustomerManager;
+        $this->_orderManager = new OrderManager;
+        $logins=$this->_loginManager->getSpeLog();
+        $customers=$this->_customerManager->getSpeCustomers();
+        $orders=$this->_orderManager->getOrdersCustomer();
+
+        $this->_view = new View('Orders');
+        $this->_view->generate(array(
+            'logins' => $logins,
+            'customers' => $customers,
+            'orders' => $orders));
     }
 
     private function updateAccount(){  

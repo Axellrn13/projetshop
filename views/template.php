@@ -47,7 +47,7 @@
                             <?= $_SESSION['username']; ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Vos commandes</a></li>
+                            <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
                             <li><a class="dropdown-item" href="account">Votre compte</a></li>
                         </ul>
                     </li>

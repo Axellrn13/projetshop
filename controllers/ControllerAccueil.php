@@ -5,6 +5,7 @@ class ControllerAccueil{
     private $_articleManager;
     private $_categorieManager;
     private $_reviewManager;
+    private $_customerManager;
     private $_view;
 
     public function __construct($url)
@@ -30,6 +31,7 @@ class ControllerAccueil{
     private function articles(){
         $this->_articleManager = new ArticleManager;
         $this->_categorieManager = new CategorieManager;
+        $this->_customerManager = new CustomerManager;
         $articles=$this->_articleManager->getArticles();
         $categories=$this->_categorieManager->getCategories();
         

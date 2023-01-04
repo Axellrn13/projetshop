@@ -37,7 +37,7 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0)">Panier</a>
+                        <a class="nav-link" href="cart">Panier</a>
                     </li>
                     <?php
                     if (isset($_SESSION['username'])) { ?>

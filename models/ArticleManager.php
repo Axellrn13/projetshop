@@ -14,5 +14,9 @@ class ArticleManager extends Model{
         $this->getBdd();
         return $this->getAllCat('products', 'Article',$cat);
     }
+
+    public function addCart(){
+        
+    }
 }
 ?>

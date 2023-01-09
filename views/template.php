@@ -37,34 +37,43 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="cart">Panier</a>
+                    <?php if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [])  { ?>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="cart">Panier
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <?= $_SESSION['nbArticle']; ?>
+                        </span></a>
                     </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart">Panier</a>
+                        </li>
+                    <?php } ?>
                     <?php
                     if (isset($_SESSION['username'])) { ?>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <?= $_SESSION['username']; ?>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
-                            <li><a class="dropdown-item" href="account">Votre compte</a></li>
-                        </ul>
-                    </li>
-                    <?php
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <?= $_SESSION['username']; ?>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
+                                <li><a class="dropdown-item" href="account">Votre compte</a></li>
+                            </ul>
+                        </li>
+                        <?php
                     } else { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login">
-                            Se connecter
+                        <li class="nav-item">
+                            <a class="nav-link" href="login">
+                                Se connecter
                             <?php } ?>
                         </a>
                     </li>
                     <?php
                     if (isset($_SESSION['username'])) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Se déconnecter</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.php">Se déconnecter</a>
+                        </li>
                     <?php } ?>
 
                 </ul>
@@ -73,12 +82,12 @@
     </nav>
     <?= $description ?>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
 
 </body>
 

@@ -3,8 +3,14 @@ if (!isset($_SESSION['panier']) && !is_array($_SESSION['panier'])) {
     // La variable de session n'existe pas
     // On la crée et on lui affecte une valeur par défaut
     $_SESSION['panier'] = array();
-}   
-print_r($_SESSION['panier']);
+}
+$nbArticle = 0;
+foreach($_SESSION['panier'] as $articlePanier): 
+    $nbArticle = $nbArticle + $articlePanier[1];
+    $_SESSION['nbArticle'] = $nbArticle;
+  
+  endforeach;
+
 ?>
 
 <section class="py-5">

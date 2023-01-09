@@ -2,7 +2,12 @@
 if (isset($_POST['inputQuantity'])) {
     array_push($_SESSION['panier'], [$articles[0]->id(),$_POST['inputQuantity']]);
 }
-print_r($_SESSION['panier']);
+$nbArticle = 0;
+foreach($_SESSION['panier'] as $articlePanier): 
+    $nbArticle = $nbArticle + $articlePanier[1];
+    $_SESSION['nbArticle'] = $nbArticle;
+  
+  endforeach;
 ?>
 
 <section class="py-5">

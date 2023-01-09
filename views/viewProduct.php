@@ -1,4 +1,9 @@
-<?php $this->_t = $articles[0]->name(); ?>
+<?php $this->_t = $articles[0]->name(); 
+if (isset($_POST['inputQuantity'])) {
+    array_push($_SESSION['panier'], [$articles[0]->id(),$_POST['inputQuantity']]);
+}
+print_r($_SESSION['panier']);
+?>
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -32,16 +37,16 @@
                     <?= $articles[0]->description(); ?>
                 </p>
 
-                <div class="d-flex">
+                <form action="accueil&id=<?= $articles[0]->id(); ?>" method="post" class="d-flex">
                     <?php if (!$rupture) { ?>
-                        <input class="form-control text-center me-3 disabled" id="inputQuantity" onkeypress="return false" min="0" max="<?= $articles[0]->quantity(); ?>" type="number" value="1"
+                        <input class="form-control text-center me-3 disabled" id="inputQuantity" name="inputQuantity" onkeypress="return false" min="0" max="<?= $articles[0]->quantity(); ?>" type="number" value="1"
                         style="max-width: 4rem" />
                     <?php } ?>
-                    <button class="btn btn-outline-dark flex-shrink-0 <?php if ($rupture) echo "disabled" ?>" type="button">
+                    <button class="btn btn-outline-dark flex-shrink-0 <?php if ($rupture) echo "disabled" ?>" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Ajouter au panier
                     </button>
-                </div>
+                </form>
             </div>
         </div>     
     </div>

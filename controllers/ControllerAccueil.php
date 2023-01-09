@@ -22,6 +22,10 @@ class ControllerAccueil{
         {
             $this->articleCat();
         }
+        elseif(isset($_GET['cartArticleId']))
+        {
+            $this->addToCart();
+        }
         else
         {
             $this->articles();
@@ -33,7 +37,7 @@ class ControllerAccueil{
         $this->_categorieManager = new CategorieManager;
         $this->_customerManager = new CustomerManager;
         $articles=$this->_articleManager->getArticles();
-        $categories=$this->_categorieManager->getCategories();
+        $categories=$this->_categorieManager->getCategories();  
         
         $this->_view = new View('Accueil');
         $this->_view->generate(array(
@@ -63,6 +67,16 @@ class ControllerAccueil{
         $this->_view->generate(array(
             'articles' => $articles,    
             'reviews' => $reviews));
+    }
+
+    private function addToCart(){
+        $this->_articleManager = new ArticleManager;
+        $this->_customerManager = new CustomerManager;
+        $articles=$this->_articleManager->getArticles(); 
+        array_push($_SESSION['panier'], [$_GET['cartArticleId'],1]);
+        $this->_view = new View('Accueil');
+        $this->_view->generate(array(
+        'articles' => $articles));
     }
 
 }

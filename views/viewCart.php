@@ -4,6 +4,7 @@ if (isset($_GET['remove'])) {
   $index = $_GET['remove']; // index de l'élément à retirer
   array_splice($_SESSION['panier'], $index, 1);
 }
+$prixTotal = 0;
 $nbArticle = 0;
 foreach($_SESSION['panier'] as $articlePanier): 
   $nbArticle = $nbArticle + $articlePanier[1];
@@ -72,9 +73,11 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                       </button>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                      <h6 class="mb-0"><?php foreach ($articles as $article) : 
+                      <h6 class="mb-0"><?php
+                      foreach ($articles as $article) : 
                           if($article->id() == $articlePanier[0]){
                             $prix = $articlePanier[1] * $article->price();
+                            $prixTotal += $prix;
                             echo $prix."€";
                           }
                           endforeach;?></h6>
@@ -99,14 +102,13 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase"><?= $nbArticle; ?> Articles </h5>
-                    <h5>€ 132.00</h5>
+                    <h5><?= $prixTotal ?>€</h5>
                   </div>
 
                   <h5 class="text-uppercase mb-3">Mode de paiment</h5>
 
                   <div class="mb-4 pb-2">
                     <select class="select">
-                      <option value="1">Visa</option>
                       <option value="2">Paypal</option>
                       <option value="3">Cheque</option>
              
@@ -116,11 +118,11 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                   <hr class="my-4">
 
                   <div class="d-flex justify-content-between mb-5">
-                    <h5 class="text-uppercase">Prix total</h5>
-                    <h5>€ 137.00</h5>
+                    <h5>PRIX TOTAL (TVA incluse)</h5>
+                    <h5><?= $prixTotal * 1.2 ?>€</h5>
                   </div>
 
-                  <a href="cart&valider"><button type="button" class="btn btn-dark btn-block btn-lg"
+                  <a href="cart&valider"><button type="submit" class="btn btn-dark btn-block btn-lg"
                     data-mdb-ripple-color="dark">Valider votre panier</button></a>
 
                 </div>

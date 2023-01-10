@@ -35,10 +35,8 @@ class ControllerCart {
     private function ValiderCart(){  
         $this->_articleManager = new ArticleManager;
         $articles=$this->_articleManager->getArticles();
-        $this->_orderManager = new OrderManager;
-        $orders=$this->_orderManager->getArticles();
 
-        $this->_view = new View('Cart');
+        $this->_view = new View('CartDel');
         $this->_view->generate(array(
             'articles' => $articles));
     }

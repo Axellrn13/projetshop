@@ -1,5 +1,5 @@
 <?php 
-if (!isset($_SESSION['panier']) && !is_array($_SESSION['panier'])) {
+if (!isset($_SESSION['panier'])) {
     // La variable de session n'existe pas
     // On la crée et on lui affecte une valeur par défaut
     $_SESSION['panier'] = array();
@@ -10,7 +10,6 @@ foreach($_SESSION['panier'] as $articlePanier):
     $_SESSION['nbArticle'] = $nbArticle;
   
   endforeach;
-
 ?>
 
 <section class="py-5">

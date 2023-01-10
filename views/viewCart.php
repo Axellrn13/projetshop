@@ -64,7 +64,7 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                         <i class="fas fa-minus"></i>
                       </button>
 
-                      <input id="form1" min="0" name="quantity" value="<?= $articlePanier[1] ?>" type="number"
+                      <input id="form1" min="0" id="quantity" name="quantity" value="<?= $articlePanier[1] ?>" type="number"
                         class="form-control form-control-sm" />
 
                       <button class="btn btn-link px-2"
@@ -111,7 +111,7 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                     <select class="select">
                       <option value="2">Paypal</option>
                       <option value="3">Cheque</option>
-             
+
                     </select>
                   </div>
 

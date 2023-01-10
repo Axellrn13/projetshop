@@ -1,6 +1,20 @@
 <?php $this->_t = $articles[0]->name(); 
 if (isset($_POST['inputQuantity'])) {
-    array_push($_SESSION['panier'], [$articles[0]->id(),$_POST['inputQuantity']]);
+    $found = false;
+        $index = 0;
+        for ($i = 0; $i < count($_SESSION['panier']); $i++) {
+            if ($_SESSION['panier'][$i][0] == $articles[0]->id()) {
+                $found = true;
+                $index = $i;
+                break;
+            }
+        }
+        if ($found) {
+            $_SESSION['panier'][$index][1] += $_POST['inputQuantity'];
+        } else {
+            array_push($_SESSION['panier'], [$articles[0]->id(),$_POST['inputQuantity']]);
+        }
+    
 }
 $nbArticle = 0;
 foreach($_SESSION['panier'] as $articlePanier): 

@@ -66,7 +66,7 @@ class Customer {
         $this->_email = $email;
     }
     public function setRegistred($registred){
-        $this->_registred = $registred;
+        $this->_registered = $registred;
     }
 
 

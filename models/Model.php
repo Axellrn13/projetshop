@@ -40,6 +40,17 @@ abstract class Model{
         $req->closeCursor();
     }
 
+    protected function createOrder($customer_id, $registered, $payment_type, $status, $session, $total){
+        $req=self::$_bdd->prepare("SET @deliveryID = (select max(id) from delivery_adresses;
+        insert into orders (customer_id, registered, delivery_add_id, payment_type, status, session, total) 
+        values (?, ?, @deliveryID, ?, ?, ?, ?);
+        ");
+        $req->execute(array($customer_id, $registered, $payment_type, $status, $session, $total));
+        $req->closeCursor();
+        header("Location: account&order");
+    }
+
+
     protected function createUser($username, $forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email, $password){
         $req=self::$_bdd->prepare("insert into customers (forname, surname, add1, add2, add3, postcode, phone, email,registered) 
         values (?, ?, ?, ?, ?, ?, ?, ?,1);

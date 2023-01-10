@@ -10,9 +10,10 @@ foreach($_SESSION['panier'] as $articlePanier):
   $_SESSION['nbArticle'] = $nbArticle;
 
 endforeach;
-print_r($_SESSION['panier']);
-?>
-<section class="h-100 h-custom" style="background-color: #d2c9ff;">
+
+if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [])  { ?>
+
+<section class="h-100 h-custom" style="background-color: #fff;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -119,8 +120,8 @@ print_r($_SESSION['panier']);
                     <h5>€ 137.00</h5>
                   </div>
 
-                  <button type="button" class="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Register</button>
+                  <a href="cart&valider"><button type="button" class="btn btn-dark btn-block btn-lg"
+                    data-mdb-ripple-color="dark">Valider votre panier</button></a>
 
                 </div>
               </div>
@@ -131,3 +132,27 @@ print_r($_SESSION['panier']);
     </div>
   </div>
 </section>
+<?php } else { ?>
+  <div class="container-fluid  mt-100">
+    <div class="row">
+    
+    <div class="col-md-12">
+      <div class="card-body cart">
+          <div class="col-sm-12 empty-cart-cls text-center">
+            <img src="https://i.imgur.com/B3JYpPP.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+            <h3><strong>Votre panier est vide !</strong></h3>
+            <h4>Ajouter des articles à votre panier pour pouvoir y accéder.</h4>
+            <a href="accueil" class="btn btn-dark cart-btn-transform m-3" data-abc="true">Continuer vos achats</a>
+            
+          
+          </div>
+      </div>
+  </div>
+      
+    
+    </div>
+    
+    </div>
+  
+  </div>
+<?php } ?>

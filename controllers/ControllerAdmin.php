@@ -1,9 +1,9 @@
 <?php 
 
 require_once('views/View.php');
-class ControllerLogin{
+class ControllerAdmin{
     private $_view;
-    private $_loginManager;
+    private $_adminManager;
 
     public function __construct($url)
     {
@@ -13,21 +13,18 @@ class ControllerLogin{
         }
         else
         {
-            $this->login();
+            $this->admin();
         }
     }
 
-    private function login(){  
-        $this->_loginManager = new LoginManager;
-        $logins=$this->_loginManager->getLog();
+    private function admin(){  
         $this->_adminManager = new AdminManager;
         $admin=$this->_adminManager->getAdmin();
         
-
         $this->_view = new View('Login');
         $this->_view->generate(array(
-            'logins' => $logins, 'admin' => $admin));
-        }
+            'admin' => $admin));
+    }
 
 }
 

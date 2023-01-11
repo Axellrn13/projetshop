@@ -10,8 +10,9 @@ foreach($_SESSION['panier'] as $articlePanier):
     $_SESSION['nbArticle'] = $nbArticle;
   
   endforeach;
+  print_r($_SESSION['admin']);
 ?>
-
+<?php print_r($_SESSION['panier']);?>
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">

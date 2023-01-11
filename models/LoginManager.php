@@ -8,5 +8,9 @@ class LoginManager extends Model{
         $this->getBdd();
         return $this->getSpeValue('logins', 'Login','id',$_SESSION['id']);
     }
+    public function getAdmin(){
+        $this->getBdd();
+        return $this->getAll('admin', 'Admin');
+    }
 }
 ?>

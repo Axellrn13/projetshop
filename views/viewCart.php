@@ -4,6 +4,7 @@ if (isset($_GET['remove'])) {
   $index = $_GET['remove']; // index de l'élément à retirer
   array_splice($_SESSION['panier'], $index, 1);
 }
+
 $prixTotal = 0;
 $nbArticle = 0;
 foreach($_SESSION['panier'] as $articlePanier): 
@@ -12,7 +13,11 @@ foreach($_SESSION['panier'] as $articlePanier):
 
 endforeach;
 
-if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [])  { ?>
+if (isset($_POST['delete'])){
+  array_splice($_SESSION['panier'], 0);
+}
+print_r($_SESSION['panier']);
+if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [] && !isset($_POST['delete']))  { ?>
 
 <section class="h-100 h-custom" style="background-color: #fff;">
   <div class="container py-5 h-100">
@@ -24,14 +29,28 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
               <div class="col-lg-8">
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
-                    <h1 class="fw-bold mb-0 text-black">Panier</h1>
-                    <h6 class="mb-0 text-muted"><?= $nbArticle; ?> articles</h6>
-                  </div>
+                    <div>
+                      <h1 class="fw-bold mb-0 text-black">Panier</h1>
+                      <h6 class="mb-0 text-muted"><?= $nbArticle; ?> articles</h6>
+                    </div>
+                    <form id="delete" action="cart&id=<?= $articles[0]->id(); ?>" method="post" class="d-flex">
+                        <button type="submit" class="btn btn-link px-2" name="delete" >
+                          <i class="fas fa-trash align-self-end"></i>
+                        </button>
+                    </form>
+                  </div> 
                   <hr class="my-4">
                   
                   <div class="row mb-4 d-flex justify-content-between align-items-center">
                   <?php $count = -1; foreach($_SESSION['panier'] as $articlePanier): 
-                    $count += 1; ?>
+                    $count += 1; 
+                    if (isset($_POST['inputQuantity']) && $_SESSION['panier'][$count][1]>0){
+                      $_SESSION['panier'][$count][1]+=$_POST['inputQuantity'];
+                      if($_SESSION['panier'][$count][1]==0){
+                        array_splice($_SESSION['panier'], $count, 1);
+                      }
+                    }
+                    ?>
                     <div class="col-md-2 col-lg-2 col-xl-2 mb-3">  
                       <img
                       src="images/<?php foreach ($articles as $article) : 
@@ -59,18 +78,18 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                           endforeach;?></h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i class="fas fa-minus"></i>
-                      </button>
+                    <form id="myForm" action="cart&id=<?= $articles[0]->id(); ?>" method="post" class="d-flex">
+                        <button type="submit" class="btn btn-link px-2" name="inputQuantity" value="-1">
+                          <i class="fas fa-minus"></i>
+                        </button>
 
-                      <input id="form1" min="0" id="quantity" name="quantity" value="<?= $articlePanier[1] ?>" type="number"
-                        class="form-control form-control-sm" />
+                          <span class="text-center disabled"><?= $_SESSION['panier'][$count][1]?></span>
 
-                      <button class="btn btn-link px-2"
-                        onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fas fa-plus"></i>
-                      </button>
+                        
+                          <button type="submit" class="btn btn-link px-2" name="inputQuantity" value="1">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                      </form>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0"><?php

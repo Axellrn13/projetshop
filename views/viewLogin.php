@@ -1,22 +1,48 @@
 <?php $this->_t = 'Se connecter';
 
 if (isset($_POST['submit'])) {
-  foreach ($logins as $login):
-    if ($login->username() == $_POST['username2']) {
-      if ($login->password() == md5($_POST['mdp'])) {
-        $_SESSION['username'] = $login->username();
-        $_SESSION['id'] = $login->id();
-        $_SESSION['customer_id'] = $login->customerid();
+  foreach ($admin as $adm):
+    if ($adm->username() == $_POST['username2'])
+    {
+      if ($adm->password() == ($_POST['mdp'])){
+        $_SESSION['username'] = $adm->username();
+        $_SESSION['id'] = $adm->id();
+        $_SESSION['admin'] = true;
         header("Location: accueil");
-      } else { ?>
+      }
+    }
+    else { ?>
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Mot de passe(admin) incorrect !</strong> Veuillez réessayer.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <?php
+      }
+    endforeach;
+}
+
+if (isset($_POST['submit'])) {
+ 
+    foreach ($logins as $login):
+    
+      if ($login->username() == $_POST['username2']) {
+        if ($login->password() == md5($_POST['mdp'])) {
+          $_SESSION['username'] = $login->username();
+          $_SESSION['id'] = $login->id();
+          $_SESSION['customer_id'] = $login->customerid();
+        
+          header("Location: accueil");}
+          }
+        else { ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>Mot de passe incorrect !</strong> Veuillez réessayer.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     <?php
       }
-    }
-  endforeach;
+   
+    endforeach;
+  var_dump($_SESSION['admin']);
 }
 ?>
 

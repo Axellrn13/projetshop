@@ -36,6 +36,21 @@
                         <a class="nav-link" href="accueil&categorie=3">Fruits secs</a>
                     </li>
                 </ul>
+                    <?php
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) { ?>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+                            <a class="dropdown-item" href="accueil&categorie=1">Gérer les commandes</a>
+                            <a class="dropdown-item" href="accueil&categorie=2">Gérer les catégories</a>
+                            <a class="dropdown-item" href="accueil&categorie=3">Gérer les articles</a>
+                            </div>
+                        </li>
+                    </ul>
+                        <?php } ?>
                 <ul class="navbar-nav ms-auto">
                     <?php if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [])  { ?>
                     <li class="nav-item position-relative">
@@ -59,6 +74,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
                                 <li><a class="dropdown-item" href="account">Votre compte</a></li>
+                                <?php
+                    if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) { ?><li><a class="dropdown-item" href="account">Toutes les commandes</a></li><?php } ?>
                             </ul>
                         </li>
                         <?php

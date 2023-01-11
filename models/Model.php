@@ -40,6 +40,13 @@ abstract class Model{
         $req->closeCursor();
     }
 
+    protected function updateOrderStatus($status){
+        $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders);
+        update orders set status=? where id=@orderid;");
+        $req->execute(array($status));
+        $req->closeCursor();
+    }
+
     protected function createOrder($customer_id, $total, $registered){
         $req=self::$_bdd->prepare("insert into orders (date, customer_id, total, registered) 
         values (curdate(),?,?,?);

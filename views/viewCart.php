@@ -122,7 +122,7 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                     <h5><?= $prixTotal * 1.2 ?>€</h5>
                   </div>
 
-                  <a href="cart&valider"><button type="submit" class="btn btn-dark btn-block btn-lg"
+                  <a href="cart&totalCart=<?= $prixTotal * 1.2 ?>"><button type="submit" class="btn btn-dark btn-block btn-lg"
                     data-mdb-ripple-color="dark">Valider votre panier</button></a>
 
                 </div>

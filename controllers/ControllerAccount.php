@@ -6,6 +6,8 @@ class ControllerAccount{
     private $_loginManager;
     private $_customerManager;
     private $_orderManager;
+    private $_orderitemsManager;
+    private $_articleManager;
 
     public function __construct($url)
     {
@@ -44,15 +46,20 @@ class ControllerAccount{
         $this->_loginManager = new LoginManager;
         $this->_customerManager = new CustomerManager;
         $this->_orderManager = new OrderManager;
+        $this->_orderitemsManager = new OrderItemsManager;
+        $this->_articleManager = new ArticleManager;
         $logins=$this->_loginManager->getSpeLog();
         $customers=$this->_customerManager->getSpeCustomers();
         $orders=$this->_orderManager->getOrdersCustomer();
-
+        $ordersitems=$this->_orderitemsManager->getOrderItems();
+        $articles=$this->_articleManager->getArticles();
         $this->_view = new View('Orders');
         $this->_view->generate(array(
             'logins' => $logins,
             'customers' => $customers,
-            'orders' => $orders));
+            'orders' => $orders,
+            'ordersitems' => $ordersitems,
+            'articles' => $articles));
     }
 
     private function updateAccount(){  

@@ -40,14 +40,21 @@ abstract class Model{
         $req->closeCursor();
     }
 
-    protected function createOrder($customer_id, $registered, $payment_type, $status, $session, $total){
-        $req=self::$_bdd->prepare("SET @deliveryID = (select max(id) from delivery_adresses;
-        insert into orders (customer_id, registered, delivery_add_id, payment_type, status, session, total) 
-        values (?, ?, @deliveryID, ?, ?, ?, ?);
+    protected function createOrder($customer_id, $total, $registered){
+        $req=self::$_bdd->prepare("insert into orders (date, customer_id, total, registered) 
+        values (curdate(),?,?,?);
         ");
-        $req->execute(array($customer_id, $registered, $payment_type, $status, $session, $total));
+        $req->execute(array($customer_id, $total, $registered));
         $req->closeCursor();
-        header("Location: account&order");
+    }
+
+    protected function createOrderitems($product_id, $quantity){
+        $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders);
+        insert into orderitems (order_id, product_id, quantity) 
+        values (@orderid,?,?);
+        ");
+        $req->execute(array($product_id, $quantity));
+        $req->closeCursor();
     }
 
 

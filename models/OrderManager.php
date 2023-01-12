@@ -12,7 +12,11 @@ class OrderManager extends Model{
         }
         $session_id = session_id();
         return $this->createOrder($_SESSION['customer_id'], $isRegistered, $payment_type, $status, $session_id, $total);
-    }    
+    } 
+    public function getOrdersAdmin(){
+        $this->getBdd();
+        return $this->getAll('orders', 'Order');
+    }   
 
 }
 ?>

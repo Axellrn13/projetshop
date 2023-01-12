@@ -8,7 +8,8 @@ foreach ($orders as $order) { ?>
         <div class="card border-top border-bottom border-3" style="border-color: #212529 !important;">
           <div class="card-body p-5">
 
-            <p class="lead fw-bold mb-5" style="color: #212529;">Détails de votre commande</p>
+            <p class="lead fw-bold mb-5" style="color: #212529;">Détails de <?php 
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) { echo $order->customer_id(); }else{ echo "votre"; }?> commande</p>
 
             <div class="row">
               <div class="col mb-3">

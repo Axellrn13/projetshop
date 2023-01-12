@@ -44,9 +44,9 @@
                             Admin
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-                            <a class="dropdown-item" href="accueil&categorie=1">Gérer les commandes</a>
+                            <a class="dropdown-item" href="accueil&order">Gérer les commandes</a>
                             <a class="dropdown-item" href="accueil&categorie=2">Gérer les catégories</a>
-                            <a class="dropdown-item" href="accueil&categorie=3">Gérer les articles</a>
+                            <a class="dropdown-item" href="accueil&admin">Gérer les articles</a>
                             </div>
                         </li>
                     </ul>
@@ -74,8 +74,6 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
                                 <li><a class="dropdown-item" href="account">Votre compte</a></li>
-                                <?php
-                    if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) { ?><li><a class="dropdown-item" href="account">Toutes les commandes</a></li><?php } ?>
                             </ul>
                         </li>
                         <?php

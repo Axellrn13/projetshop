@@ -8,6 +8,7 @@ class ControllerAccount{
     private $_orderManager;
     private $_orderitemsManager;
     private $_articleManager;
+    private $_deliveryAdressesManager;
 
     public function __construct($url)
     {
@@ -18,6 +19,10 @@ class ControllerAccount{
         elseif(isset($_GET['update']))
         {
             $this->updateAccount();
+        }
+        elseif(isset($_GET['updateAdress']))
+        {
+            $this->updateAdress();
         }
         elseif(isset($_GET['order']))
         {
@@ -69,6 +74,20 @@ class ControllerAccount{
         $logins=$this->_loginManager->getSpeLog();
         $customers=$this->_customerManager->getSpeCustomers();
 
+        $this->_view = new View('Account');
+        $this->_view->generate(array(
+            'logins' => $logins,
+            'customers' => $customers));
+    }
+
+    private function updateAdress(){  
+        $this->_loginManager = new LoginManager;
+        $this->_customerManager = new CustomerManager;
+        $this->_customerManager->updateCustomer();
+        $logins=$this->_loginManager->getSpeLog();
+        $customers=$this->_customerManager->getSpeCustomers();
+        $this->_deliveryAdressesManager = new Delivery_addressesManager;
+        $this->_deliveryAdressesManager->createAdress();
         $this->_view = new View('Account');
         $this->_view->generate(array(
             'logins' => $logins,

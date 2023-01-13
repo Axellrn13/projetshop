@@ -40,10 +40,10 @@ abstract class Model{
         $req->closeCursor();
     }
 
-    protected function updateOrderStatus($status){
-        $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders);
+    protected function updateOrderStatus($status,$custid){
+        $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders where customer_id=?);
         update orders set status=? where id=@orderid;");
-        $req->execute(array($status));
+        $req->execute(array($custid,$status));
         $req->closeCursor();
     }
 
@@ -74,6 +74,17 @@ abstract class Model{
         $req->execute(array($forname, $surname, $add1, $add2, $add3, $postcode, $phone, $email,$username,$password));
         $req->closeCursor();
         header("Location: logout.php");
+    }
+    protected function createDelAdress($firstname, $lastname, $add1, $add2, $city, $postcode, $phone, $email){
+        $req=self::$_bdd->prepare("IF (SELECT COUNT(1) FROM delivery_addresses WHERE firstname = ? AND lastname = ?) > 0
+        THEN 
+          UPDATE delivery_addresses SET add1 = ?, add2 = ?, city = ?, postcode = ?, phone= ?, email = ? WHERE firstname = ? AND lastname = ?;
+        ELSE
+          INSERT INTO delivery_addresses (firstname, lastname, add1, add2, city, postcode, phone, email) 
+            VALUES (?,?,?,?,?,?,?,?);
+        END IF;;");
+        $req->execute(array($firstname, $lastname, $add1, $add2, $city, $postcode, $phone, $email,$firstname, $lastname,$firstname, $lastname,$add1, $add2, $city, $postcode, $phone, $email));
+        $req->closeCursor();
     }
 
     protected function getAllCat($table, $obj, $cat){

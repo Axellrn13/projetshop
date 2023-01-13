@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['submit'])) {
     if ($_POST['adressecart'] == $customers[0]->add1()) {
-        $_SESSION['panierstatus'] = 2;
+        header("Location: cart&adressChecked");
     } else {
         $_SESSION['codepost'] = $_POST['postcodecart'];
         $_SESSION['tel'] = $_POST['phonecart'];
@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['adresse'] = $_POST['adressecart'];
         $_SESSION['ville'] = $_POST['villecart'];
         $_SESSION['pays'] = $_POST['payscart'];
+        header("Location: cart&adressModified");
     }
 }
 
@@ -81,7 +82,7 @@ if (isset($_SESSION['customer_id'])) { ?>
                             <label class="form-label" for="form7Example6">Téléphone</label>
                         </div>
                         <button name="submit" type="submit" class="btn btn-outline-dark btn-lg px-5">
-                            Valider adresse de livraison
+                            Procéder au paiement
                         </button>
                     </form>
                 </div>

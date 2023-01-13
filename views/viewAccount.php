@@ -2,17 +2,29 @@
 $this->_t = 'Mes infos';
 
 if (isset($_POST['submit'])) {
-
-    $_SESSION['username'] = $_POST['username'];
-    $_SESSION['nom'] = $_POST['nom'];
-    $_SESSION['prenom'] = $_POST['prenom'];
-    $_SESSION['codepost'] = $_POST['codepost'];
-    $_SESSION['tel'] = $_POST['tel'];
-    $_SESSION['mail'] = $_POST['mail'];
-    $_SESSION['adresse'] = $_POST['adresse'];
-    $_SESSION['ville'] = $_POST['ville'];
-    $_SESSION['pays'] = $_POST['pays'];
-    header("Location: account&update");
+    if ($_SESSION['adresse'] == $_POST['adresse']) {
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['nom'] = $_POST['nom'];
+        $_SESSION['prenom'] = $_POST['prenom'];
+        $_SESSION['codepost'] = $_POST['codepost'];
+        $_SESSION['tel'] = $_POST['tel'];
+        $_SESSION['mail'] = $_POST['mail'];
+        $_SESSION['adresse'] = $_POST['adresse'];
+        $_SESSION['ville'] = $_POST['ville'];
+        $_SESSION['pays'] = $_POST['pays'];
+        header("Location: account&update");
+    } else {
+        $_SESSION['username'] = $_POST['username'];
+        $_SESSION['nom'] = $_POST['nom'];
+        $_SESSION['prenom'] = $_POST['prenom'];
+        $_SESSION['codepost'] = $_POST['codepost'];
+        $_SESSION['tel'] = $_POST['tel'];
+        $_SESSION['mail'] = $_POST['mail'];
+        $_SESSION['adresse'] = $_POST['adresse'];
+        $_SESSION['ville'] = $_POST['ville'];
+        $_SESSION['pays'] = $_POST['pays'];
+        header("Location: account&updateAdress");
+    }
 }
 ?>
 <section class="text-center">
@@ -37,13 +49,13 @@ if (isset($_POST['submit'])) {
                             <div class="col-md-6 mb-4">
                                 <div class="form-outline">
                                     <input autocomplete="off" name="nom" type="text" id="form3Example1"
-                                        class="form-control" value="<?= $customers[0]->forname(); ?>" />
+                                        class="form-control" readonly value="<?= $customers[0]->forname(); ?>" />
                                     <label class="form-label" for="form3Example1">Nom</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="form-outline">
-                                    <input type="text" name="prenom" id="form3Example2" class="form-control"
+                                    <input type="text" name="prenom" id="form3Example2" readonly class="form-control"
                                         value="<?= $customers[0]->surname(); ?>" />
                                     <label class="form-label" for="form3Example2">Prénom</label>
                                 </div>

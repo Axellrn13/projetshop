@@ -7,6 +7,12 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $login->username();
         $_SESSION['id'] = $login->id();
         $_SESSION['customer_id'] = $login->customerid();
+        foreach ($customers as $customer):
+          if ($customer->id() == $_SESSION['customer_id']) {
+            $_SESSION['nom'] = $customer->forname();
+            $_SESSION['prenom'] = $customer->surname();
+          }
+        endforeach;
         header("Location: accueil");
       } else { ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">

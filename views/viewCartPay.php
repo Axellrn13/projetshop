@@ -63,8 +63,6 @@
                             Remarque : En cliquant sur le bouton, vous serez redirigé vers la facture et vous validerez
                             la méthode de paiement par chèque. </p>
                     </div>
-                    <!-- End -->
-                    <!-- End -->
                 </div>
             </div>
         </div>

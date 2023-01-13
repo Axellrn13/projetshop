@@ -15,7 +15,7 @@ class OrderManager extends Model{
 
     public function updateStatus($status){
         $this->getBdd();
-        return $this->updateOrderStatus($status);
+        return $this->updateOrderStatus($_SESSION['customer_id'],$status);
     }  
 }
 ?>

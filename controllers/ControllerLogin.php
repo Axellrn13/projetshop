@@ -4,6 +4,7 @@ require_once('views/View.php');
 class ControllerLogin{
     private $_view;
     private $_loginManager;
+    private $_customerManager;
 
     public function __construct($url)
     {
@@ -20,10 +21,15 @@ class ControllerLogin{
     private function login(){  
         $this->_loginManager = new LoginManager;
         $logins=$this->_loginManager->getLog();
-
+        $this->_customerManager = new CustomerManager;
+        $customers = $this->_customerManager->getCustomers();
         $this->_view = new View('Login');
-        $this->_view->generate(array(
-            'logins' => $logins));
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers
+            )
+        );
     }
 
 }

@@ -1,4 +1,5 @@
 <?php $this->_t = 'Vos commandes';
+
 foreach ($orders as $order) { ?>
 
   <section class="h-100 h-custom" style="background-color: #eee;">

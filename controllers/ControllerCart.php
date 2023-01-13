@@ -24,6 +24,8 @@ class ControllerCart
             $this->ValiderPayment();
         } elseif (isset($_GET['adressModified'])) {
             $this->ModifyAdress();
+        } elseif (isset($_GET['payment'])) {
+            $this->paymentChecked();
         } else {
             $this->cart();
         }
@@ -68,6 +70,27 @@ class ControllerCart
             'logins' => $logins,
             'customers' => $customers,
             'orders' => $orders,
+            'articles' => $articles));
+    }
+
+    private function paymentChecked(){  
+        $this->_loginManager = new LoginManager;
+        $this->_customerManager = new CustomerManager;
+        $this->_orderManager = new OrderManager;
+        $this->_orderitemsManager = new OrderItemsManager;
+        $this->_articleManager = new ArticleManager;
+        $this->_orderManager->updatePaymentType(strval($_GET['payment']));
+        $logins=$this->_loginManager->getSpeLog();
+        $customers=$this->_customerManager->getSpeCustomers();
+        $orders=$this->_orderManager->getOrdersCustomer();
+        $ordersitems=$this->_orderitemsManager->getOrderItems();
+        $articles=$this->_articleManager->getArticles();
+        $this->_view = new View('Orders');
+        $this->_view->generate(array(
+            'logins' => $logins,
+            'customers' => $customers,
+            'orders' => $orders,
+            'ordersitems' => $ordersitems,
             'articles' => $articles));
     }
 

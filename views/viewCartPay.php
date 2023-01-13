@@ -31,7 +31,7 @@
                             </div>
                             <div class="p-2">
                                 <p>
-                                    <a href="cart&paypal"><button type="button" class="btn btn-dark">Valider cette
+                                    <a href="cart&payment=paypal"><button type="button" class="btn btn-dark">Valider cette
                                             méthode de paiement</button></a>
                                 </p>
                             </div>
@@ -54,7 +54,8 @@
                                 </div>
                                 <div class="p-2">
                                     <p>
-                                        <button type="button" class="btn btn-dark">Valider cette méthode de paiement</button>
+                                    <a href="cart&payment=cheque"><button type="button" class="btn btn-dark">Valider cette
+                                            méthode de paiement</button></a>
                                     </p>
                                 </div>
                             </div>

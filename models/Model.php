@@ -40,6 +40,13 @@ abstract class Model{
         $req->closeCursor();
     }
 
+    protected function updatePayType($payment_type,$custid,$sessionid){
+        $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders where customer_id=?);
+        update orders set payment_type=?, session=? where id=@orderid;");
+        $req->execute(array($custid,$payment_type,$sessionid));
+        $req->closeCursor();
+    }
+
     protected function updateOrderStatus($status,$custid){
         $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders where customer_id=?);
         update orders set status=? where id=@orderid;");
@@ -47,11 +54,12 @@ abstract class Model{
         $req->closeCursor();
     }
 
-    protected function createOrder($customer_id, $total, $registered){
-        $req=self::$_bdd->prepare("insert into orders (date, customer_id, total, registered) 
-        values (curdate(),?,?,?);
+    protected function createOrder($firstname, $lastname, $customer_id, $total, $registered){
+        $req=self::$_bdd->prepare("SET @deliveryId = (select id from delivery_addresses where firstname = ? and lastname = ?);
+        insert into orders (status, date, customer_id, total, registered, delivery_add_id) 
+        values (2, curdate(),?,?,?,@deliveryId);
         ");
-        $req->execute(array($customer_id, $total, $registered));
+        $req->execute(array($firstname, $lastname, $customer_id, $total, $registered));
         $req->closeCursor();
     }
 

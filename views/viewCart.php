@@ -116,16 +116,6 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                       <h5><?= $prixTotal ?>€</h5>
                     </div>
 
-                    <h5 class="text-uppercase mb-3">Mode de paiment</h5>
-
-                    <div class="mb-4 pb-2">
-                      <select class="select">
-                        <option value="2">Paypal</option>
-                        <option value="3">Cheque</option>
-
-                      </select>
-                    </div>
-
                     <hr class="my-4">
 
                     <div class="d-flex justify-content-between mb-5">

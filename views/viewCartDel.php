@@ -1,4 +1,5 @@
 <?php
+$this->_t = 'Entrez votre adresse';
 if (isset($_POST['submit'])) {
     if ($_POST['adressecart'] == $customers[0]->add1()) {
         header("Location: cart&adressChecked");

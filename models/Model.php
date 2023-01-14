@@ -47,7 +47,7 @@ abstract class Model{
         $req->closeCursor();
     }
 
-    protected function updateOrderStatus($status,$custid){
+    protected function updateOrderStatus($custid,$status){
         $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders where customer_id=?);
         update orders set status=? where id=@orderid;");
         $req->execute(array($custid,$status));

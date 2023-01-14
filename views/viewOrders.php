@@ -1,4 +1,14 @@
 <?php $this->_t = 'Vos commandes';
+if (!isset($_SESSION['panier'])) {
+  // La variable de session n'existe pas
+  // On la crée et on lui affecte une valeur par défaut
+  $_SESSION['panier'] = array();
+}
+if (!isset($_SESSION['statuspanier'])) {
+  // La variable de session n'existe pas
+  // On la crée et on lui affecte une valeur par défaut
+  $_SESSION['statuspanier'] = 0;
+}
 
 foreach ($orders as $order) { ?>
 
@@ -60,7 +70,7 @@ foreach ($orders as $order) { ?>
                 <?php } elseif ($order->status() == 10) { ?>
                   <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Commande envoyé<em></em></div>
                 <?php } else { ?>
-                  <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Envoi de votre commande</div>
+                  <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Préparation de votre commande</div>
                 <?php } ?>
               </div>
             </div>

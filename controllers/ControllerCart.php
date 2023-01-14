@@ -21,11 +21,16 @@ class ControllerCart
             $this->ValiderCart();
             $_SESSION['totalCart'] = $_GET['totalCart'];
         } elseif (isset($_GET['adressChecked'])) {
+            $_SESSION['statuspanier'] = 2;
             $this->ValiderPayment();
         } elseif (isset($_GET['adressModified'])) {
+            $_SESSION['statuspanier'] = 2;
             $this->ModifyAdress();
         } elseif (isset($_GET['payment'])) {
+            $_SESSION['statuspanier'] = 3;
             $this->paymentChecked();
+            unset($_SESSION['statuspanier']);
+            unset($_SESSION['panier']);
         } else {
             $this->cart();
         }
@@ -38,14 +43,27 @@ class ControllerCart
         $this->_customerManager = new CustomerManager;
         $this->_orderManager = new OrderManager;
         $articles = $this->_articleManager->getArticles();
-        $logins=$this->_loginManager->getSpeLog();
-        $customers=$this->_customerManager->getSpeCustomers();
-        $this->_view = new View('Cart');
+        $logins = $this->_loginManager->getSpeLog();
+        $customers = $this->_customerManager->getSpeCustomers();
+        $orders = $this->_orderManager->getOrdersCustomer();
+        if (isset($_SESSION['statuspanier'])&& $_SESSION['statuspanier'] == 2) {
+            $this->_view = new View('CartPay');
         $this->_view->generate(
             array(
+                'logins' => $logins,
+                'customers' => $customers,
+                'orders' => $orders,
                 'articles' => $articles
             )
         );
+        } else {
+            $this->_view = new View('Cart');
+            $this->_view->generate(
+                array(
+                    'articles' => $articles
+                )
+            );
+        }
     }
 
     private function ModifyAdress()
@@ -56,42 +74,50 @@ class ControllerCart
         $articles = $this->_articleManager->getArticles();
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager;
-        $customers=$this->_customerManager->getSpeCustomers();
+        $customers = $this->_customerManager->getSpeCustomers();
         $this->_orderitemsManager = new OrderItemsManager;
         $this->_loginManager = new LoginManager;
-        $logins=$this->_loginManager->getSpeLog();
-        $orders=$this->_orderManager->getOrdersCustomer();
+        $logins = $this->_loginManager->getSpeLog();
+        $orders = $this->_orderManager->getOrdersCustomer();
         $this->_orderManager->createOneOrder($_SESSION['totalCart']);
         foreach ($_SESSION['panier'] as $articlepanier):
             $this->_orderitemsManager->addOrderItem($articlepanier[0], $articlepanier[1]);
         endforeach;
         $this->_view = new View('CartPay');
-        $this->_view->generate(array(
-            'logins' => $logins,
-            'customers' => $customers,
-            'orders' => $orders,
-            'articles' => $articles));
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers,
+                'orders' => $orders,
+                'articles' => $articles
+            )
+        );
     }
 
-    private function paymentChecked(){  
+    private function paymentChecked()
+    {
         $this->_loginManager = new LoginManager;
         $this->_customerManager = new CustomerManager;
         $this->_orderManager = new OrderManager;
         $this->_orderitemsManager = new OrderItemsManager;
         $this->_articleManager = new ArticleManager;
         $this->_orderManager->updatePaymentType(strval($_GET['payment']));
-        $logins=$this->_loginManager->getSpeLog();
-        $customers=$this->_customerManager->getSpeCustomers();
-        $orders=$this->_orderManager->getOrdersCustomer();
-        $ordersitems=$this->_orderitemsManager->getOrderItems();
-        $articles=$this->_articleManager->getArticles();
+        $this->_orderManager->updateStatus($_SESSION['statuspanier']);
+        $logins = $this->_loginManager->getSpeLog();
+        $customers = $this->_customerManager->getSpeCustomers();
+        $orders = $this->_orderManager->getOrdersCustomer();
+        $ordersitems = $this->_orderitemsManager->getOrderItems();
+        $articles = $this->_articleManager->getArticles();
         $this->_view = new View('Orders');
-        $this->_view->generate(array(
-            'logins' => $logins,
-            'customers' => $customers,
-            'orders' => $orders,
-            'ordersitems' => $ordersitems,
-            'articles' => $articles));
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers,
+                'orders' => $orders,
+                'ordersitems' => $ordersitems,
+                'articles' => $articles
+            )
+        );
     }
 
     private function ValiderCart()
@@ -99,14 +125,17 @@ class ControllerCart
         $this->_articleManager = new ArticleManager;
         $articles = $this->_articleManager->getArticles();
         $this->_customerManager = new CustomerManager;
-        $customers=$this->_customerManager->getSpeCustomers();
+        $customers = $this->_customerManager->getSpeCustomers();
         $this->_loginManager = new LoginManager;
-        $logins=$this->_loginManager->getSpeLog();
+        $logins = $this->_loginManager->getSpeLog();
         $this->_view = new View('CartDel');
-        $this->_view->generate(array(
-            'logins' => $logins,
-            'customers' => $customers,
-            'articles' => $articles));
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers,
+                'articles' => $articles
+            )
+        );
     }
     private function ValiderPayment()
     {
@@ -114,21 +143,24 @@ class ControllerCart
         $articles = $this->_articleManager->getArticles();
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager;
-        $customers=$this->_customerManager->getSpeCustomers();
+        $customers = $this->_customerManager->getSpeCustomers();
         $this->_orderitemsManager = new OrderItemsManager;
         $this->_loginManager = new LoginManager;
-        $logins=$this->_loginManager->getSpeLog();
-        $orders=$this->_orderManager->getOrdersCustomer();
+        $logins = $this->_loginManager->getSpeLog();
+        $orders = $this->_orderManager->getOrdersCustomer();
         $this->_orderManager->createOneOrder($_SESSION['totalCart']);
         foreach ($_SESSION['panier'] as $articlepanier):
             $this->_orderitemsManager->addOrderItem($articlepanier[0], $articlepanier[1]);
         endforeach;
         $this->_view = new View('CartPay');
-        $this->_view->generate(array(
-            'logins' => $logins,
-            'customers' => $customers,
-            'orders' => $orders,
-            'articles' => $articles));
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers,
+                'orders' => $orders,
+                'articles' => $articles
+            )
+        );
     }
 }
 

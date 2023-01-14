@@ -4,6 +4,11 @@ if (!isset($_SESSION['panier'])) {
     // On la crée et on lui affecte une valeur par défaut
     $_SESSION['panier'] = array();
 }
+if (!isset($_SESSION['statuspanier'])) {
+    // La variable de session n'existe pas
+    // On la crée et on lui affecte une valeur par défaut
+    $_SESSION['statuspanier'] = 0;
+}
 $nbArticle = 0;
 foreach($_SESSION['panier'] as $articlePanier): 
     $nbArticle = $nbArticle + $articlePanier[1];

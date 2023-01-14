@@ -1,3 +1,7 @@
+<?php
+$this->_t = 'Mode de paiement';
+?>
+
 <div class="row">
     <div class="col-lg-6 mx-auto mt-4">
         <div class="card">
@@ -61,7 +65,7 @@
                             </div>
                         </div>
                         <p class="text-muted">
-                            Remarque : En cliquant sur le bouton, vous serez redirigé vers la facture et vous validerez
+                            Remarque : En cliquant sur le bouton, vous serez redirigé vers les commandes et vous validerez
                             la méthode de paiement par chèque. </p>
                     </div>
                 </div>

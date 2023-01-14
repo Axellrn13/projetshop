@@ -1,5 +1,17 @@
 <?php
 $this->_t = 'Panier';
+
+if (!isset($_SESSION['panier'])) {
+  // La variable de session n'existe pas
+  // On la crée et on lui affecte une valeur par défaut
+  $_SESSION['panier'] = array();
+}
+if (!isset($_SESSION['statuspanier'])) {
+  // La variable de session n'existe pas
+  // On la crée et on lui affecte une valeur par défaut
+  $_SESSION['statuspanier'] = 0;
+}
+
 if (isset($_GET['remove'])) {
   $index = $_GET['remove']; // index de l'élément à retirer
   array_splice($_SESSION['panier'], $index, 1);

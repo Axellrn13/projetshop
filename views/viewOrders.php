@@ -47,7 +47,15 @@ foreach ($orders as $order) { ?>
               </div>
 
 
-              <div class="row my-4">
+              <div class="row my-4 ">
+                <div class="col mt-4">
+                  <p class="lead fw-bold mb-0" style="color: #212529;">
+                  <?php $id = $order->id();?>
+                    <a href="<?php echo "order&id=".$id; ?>"><button name="submit" type="submit" class="btn btn-primary ">
+                      Plus de détails
+                    </button></a>
+                  </p>
+                </div>
                 <div class="col-md-4 offset-md-8 col-lg-5 offset-lg-9">
                   <p class="lead fw-bold mb-0" style="color: #212529;">Total : <?= $order->total() ?> €</p>
                 </div>

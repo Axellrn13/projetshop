@@ -5,6 +5,7 @@ class ControllerLogin{
     private $_view;
     private $_loginManager;
     private $_customerManager;
+    private $_adminManager;
 
     public function __construct($url)
     {
@@ -22,12 +23,15 @@ class ControllerLogin{
         $this->_loginManager = new LoginManager;
         $logins=$this->_loginManager->getLog();
         $this->_customerManager = new CustomerManager;
+        $this->_adminManager = new AdminManager;
+        $admin=$this->_adminManager->getAdmin();
         $customers = $this->_customerManager->getCustomers();
         $this->_view = new View('Login');
         $this->_view->generate(
             array(
                 'logins' => $logins,
-                'customers' => $customers
+                'customers' => $customers,
+                'admin' => $admin
             )
         );
     }

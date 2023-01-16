@@ -1,6 +1,17 @@
 <?php $this->_t = 'Se connecter';
 
 if (isset($_POST['submit'])) {
+  foreach ($admin as $adm):
+    if ($adm->username() == $_POST['username2'])
+    {
+      if ($adm->password() == ($_POST['mdp'])){
+        $_SESSION['username'] = $adm->username();
+        $_SESSION['id'] = $adm->id();
+        $_SESSION['admin'] = true;
+        header("Location: accueil");
+      }
+    }
+    endforeach;
   foreach ($logins as $login):
     if ($login->username() == $_POST['username2']) {
       if ($login->password() == md5($_POST['mdp'])) {

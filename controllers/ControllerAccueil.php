@@ -7,6 +7,8 @@ class ControllerAccueil
     private $_categorieManager;
     private $_reviewManager;
     private $_customerManager;
+    private $_orderManager;
+    private $_orderItemsManager;
     private $_view;
 
     public function __construct($url)
@@ -19,9 +21,43 @@ class ControllerAccueil
             $this->articleCat();
         } elseif (isset($_GET['cartArticleId'])) {
             $this->addToCart();
+        } elseif (isset($_GET['admin'])){
+            $this->articleAdmin();
+        } elseif (isset($_GET['order'])){
+            $this->OrderAdmin();
         } else {
             $this->articles();
         }
+    }
+
+    private function articleAdmin(){
+        $this->_articleManager = new ArticleManager;
+        $this->_categorieManager = new CategorieManager;
+        $articles = $this->_articleManager->getArticles();
+        $categories = $this->_categorieManager->getCategories();
+
+        $this->_view = new View('Admin');
+        $this->_view->generate(array(
+            'articles' => $articles,
+            'categories' => $categories
+        ));
+    }
+    private function OrderAdmin(){
+        $this->_articleManager = new ArticleManager;
+        $this->_orderManager = new OrderManager;
+        $this->_customerManager = new CustomerManager();
+        $this->_orderItemsManager = new OrderItemsManager;
+        $articles = $this->_articleManager->getArticles();
+        $orders = $this->_orderManager->getOrders();
+        $customers = $this->_customerManager->getCustomers();
+        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $this->_view = new View('OrderAdmin');
+        $this->_view->generate(array(
+            'articles' => $articles,
+            'orders' => $orders,
+            'customers' => $customers,
+            'ordersitems' => $ordersitems
+        ));
     }
 
     private function articles()

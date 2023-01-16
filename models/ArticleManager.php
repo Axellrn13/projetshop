@@ -15,8 +15,9 @@ class ArticleManager extends Model{
         return $this->getAllCat('products', 'Article',$cat);
     }
 
-    public function addCart(){
-        
+    public function updateQuantity($id,$qty){
+        $this->getBdd();
+        return $this->updateQuantityArticle($id,$qty);
     }
 }
 ?>

@@ -21,6 +21,15 @@ class OrderManager extends Model{
         $this->getBdd();
         return $this->updateOrderStatus($_SESSION['customer_id'],$status);
     }  
+
+    public function updateStatusSpe($status, $orderid){
+        $this->getBdd();
+        return $this->updateOrderStatusSpe($status,$orderid);
+    }  
+    public function deleteOrder($orderid){
+        $this->getBdd();
+        return $this->deleteOrderSpe($orderid);
+    }  
     public function updatePaymentType($payType){
         $this->getBdd();
         return $this->updatePayType($payType,$_SESSION['customer_id'], session_id());

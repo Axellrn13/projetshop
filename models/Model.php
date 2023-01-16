@@ -54,6 +54,24 @@ abstract class Model{
         $req->closeCursor();
     }
 
+    protected function updateOrderStatusSpe($status,$order_id){
+        $req=self::$_bdd->prepare("update orders set status=? where id=?;");
+        $req->execute(array($status,$order_id));
+        $req->closeCursor();
+    }
+
+    protected function updateQuantityArticle($id,$qty){
+        $req=self::$_bdd->prepare("update products set quantity=? where id=?;");
+        $req->execute(array($qty,$id));
+        $req->closeCursor();
+    }
+
+    protected function deleteOrderSpe($order_id){
+        $req=self::$_bdd->prepare("DELETE FROM orders WHERE id=?");
+        $req->execute(array($order_id));
+        $req->closeCursor();
+    }
+
     protected function createOrder($firstname, $lastname, $customer_id, $total, $registered){
         $req=self::$_bdd->prepare("SET @deliveryId = (select id from delivery_addresses where firstname = ? and lastname = ?);
         insert into orders (status, date, customer_id, total, registered, delivery_add_id) 

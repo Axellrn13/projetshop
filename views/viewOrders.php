@@ -30,6 +30,10 @@ foreach ($orders as $order) { ?>
                   <p class="small text-muted mb-1">Commande n°</p>
                   <p><?= $order->id() ?></p>
                 </div>
+                <div class="col mb-3">
+                  <p class="small text-muted mb-1">Paiement par</p>
+                  <p><?= ucfirst($order->payment_type()) ?></p>
+                </div>
               </div>
 
               <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">

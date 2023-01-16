@@ -25,6 +25,14 @@ class ControllerAccueil
             $this->articleAdmin();
         } elseif (isset($_GET['order'])){
             $this->OrderAdmin();
+        } elseif (isset($_GET['annule'])){
+            $this->CancelOrder();
+        } elseif (isset($_GET['valide'])){
+            $this->CheckOrder();
+        } elseif (isset($_GET['supprime'])){
+            $this->DeleteOrder();
+        } elseif (isset($_GET['supprime'])){
+            $this->DeleteOrder();
         } else {
             $this->articles();
         }
@@ -38,10 +46,66 @@ class ControllerAccueil
 
         $this->_view = new View('Admin');
         $this->_view->generate(array(
-            'articles' => $articles,
-            'categories' => $categories
+            'articles' => $articles
         ));
     }
+
+    private function DeleteOrder(){
+        $this->_articleManager = new ArticleManager;
+        $this->_orderManager = new OrderManager;
+        $this->_customerManager = new CustomerManager();
+        $this->_orderItemsManager = new OrderItemsManager;
+        $this->_orderManager->deleteOrder($_GET['supprime']);
+        $articles = $this->_articleManager->getArticles();
+        $orders = $this->_orderManager->getOrders();
+        $customers = $this->_customerManager->getCustomers();
+        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $this->_view = new View('OrderAdmin');
+        $this->_view->generate(array(
+            'articles' => $articles,
+            'orders' => $orders,
+            'customers' => $customers,
+            'ordersitems' => $ordersitems
+        ));
+    }
+    private function CancelOrder(){
+        $this->_articleManager = new ArticleManager;
+        $this->_orderManager = new OrderManager;
+        $this->_customerManager = new CustomerManager();
+        $this->_orderItemsManager = new OrderItemsManager;
+        $this->_orderManager->updateStatusSpe(-1, $_GET['annule']);
+        $articles = $this->_articleManager->getArticles();
+        $orders = $this->_orderManager->getOrders();
+        $customers = $this->_customerManager->getCustomers();
+        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $this->_view = new View('OrderAdmin');
+        $this->_view->generate(array(
+            'articles' => $articles,
+            'orders' => $orders,
+            'customers' => $customers,
+            'ordersitems' => $ordersitems
+        ));
+    }
+    private function CheckOrder(){
+        $this->_articleManager = new ArticleManager;
+        $this->_orderManager = new OrderManager;
+        $this->_customerManager = new CustomerManager();
+        $this->_orderItemsManager = new OrderItemsManager;
+        $this->_orderManager->updateStatusSpe(10, $_GET['valide']);
+        $articles = $this->_articleManager->getArticles();
+        $orders = $this->_orderManager->getOrders();
+        $customers = $this->_customerManager->getCustomers();
+        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $this->_view = new View('OrderAdmin');
+        $this->_view->generate(array(
+            'articles' => $articles,
+            'orders' => $orders,
+            'customers' => $customers,
+            'ordersitems' => $ordersitems
+        ));
+    }
+
+
     private function OrderAdmin(){
         $this->_articleManager = new ArticleManager;
         $this->_orderManager = new OrderManager;

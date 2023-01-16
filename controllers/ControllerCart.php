@@ -46,7 +46,7 @@ class ControllerCart
         $logins = $this->_loginManager->getSpeLog();
         $customers = $this->_customerManager->getSpeCustomers();
         $orders = $this->_orderManager->getOrdersCustomer();
-        if (isset($_SESSION['statuspanier'])&& $_SESSION['statuspanier'] == 2) {
+        if (isset($_SESSION['statuspanier']) && $_SESSION['statuspanier'] == 2) {
             $this->_view = new View('CartPay');
         $this->_view->generate(
             array(

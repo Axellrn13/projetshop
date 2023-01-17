@@ -45,7 +45,6 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
                             <a class="dropdown-item" href="accueil&order">Gérer les commandes</a>
-                            <a class="dropdown-item" href="accueil&categorie=2">Gérer les catégories</a>
                             <a class="dropdown-item" href="accueil&admin">Gérer les articles</a>
                             </div>
                         </li>

@@ -15,9 +15,9 @@ class ArticleManager extends Model{
         return $this->getAllCat('products', 'Article',$cat);
     }
 
-    public function updateQuantity($id,$qty){
+    public function updateQuantity(){
         $this->getBdd();
-        return $this->updateQuantityArticle($id,$qty);
+        return $this->updateQuantityArticle($_SESSION['idToModify'],$_SESSION['qtyToModify']);
     }
 }
 ?>

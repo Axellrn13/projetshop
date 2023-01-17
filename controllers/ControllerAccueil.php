@@ -21,36 +21,51 @@ class ControllerAccueil
             $this->articleCat();
         } elseif (isset($_GET['cartArticleId'])) {
             $this->addToCart();
-        } elseif (isset($_GET['admin'])){
+        } elseif (isset($_GET['admin'])) {
             $this->articleAdmin();
-        } elseif (isset($_GET['order'])){
+        } elseif (isset($_GET['order'])) {
             $this->OrderAdmin();
-        } elseif (isset($_GET['annule'])){
+        } elseif (isset($_GET['annule'])) {
             $this->CancelOrder();
-        } elseif (isset($_GET['valide'])){
+        } elseif (isset($_GET['valide'])) {
             $this->CheckOrder();
-        } elseif (isset($_GET['supprime'])){
+        } elseif (isset($_GET['supprime'])) {
             $this->DeleteOrder();
-        } elseif (isset($_GET['supprime'])){
-            $this->DeleteOrder();
+        } elseif (isset($_GET['modifyqty'])) {
+            $this->modifyqty();
         } else {
             $this->articles();
         }
     }
 
-    private function articleAdmin(){
+    private function articleAdmin()
+    {
         $this->_articleManager = new ArticleManager;
         $this->_categorieManager = new CategorieManager;
         $articles = $this->_articleManager->getArticles();
-        $categories = $this->_categorieManager->getCategories();
-
         $this->_view = new View('Admin');
-        $this->_view->generate(array(
-            'articles' => $articles
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles
+            )
+        );
     }
 
-    private function DeleteOrder(){
+    private function modifyqty()
+    {
+        $this->_articleManager = new ArticleManager;
+        $this->_articleManager->updateQuantity();
+        $articles = $this->_articleManager->getArticles();
+        $this->_view = new View('Admin');
+        $this->_view->generate(
+            array(
+                'articles' => $articles
+            )
+        );
+    }
+
+    private function DeleteOrder()
+    {
         $this->_articleManager = new ArticleManager;
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager();
@@ -59,16 +74,19 @@ class ControllerAccueil
         $articles = $this->_articleManager->getArticles();
         $orders = $this->_orderManager->getOrders();
         $customers = $this->_customerManager->getCustomers();
-        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $ordersitems = $this->_orderItemsManager->getOrderItems();
         $this->_view = new View('OrderAdmin');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'orders' => $orders,
-            'customers' => $customers,
-            'ordersitems' => $ordersitems
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'orders' => $orders,
+                'customers' => $customers,
+                'ordersitems' => $ordersitems
+            )
+        );
     }
-    private function CancelOrder(){
+    private function CancelOrder()
+    {
         $this->_articleManager = new ArticleManager;
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager();
@@ -77,16 +95,19 @@ class ControllerAccueil
         $articles = $this->_articleManager->getArticles();
         $orders = $this->_orderManager->getOrders();
         $customers = $this->_customerManager->getCustomers();
-        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $ordersitems = $this->_orderItemsManager->getOrderItems();
         $this->_view = new View('OrderAdmin');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'orders' => $orders,
-            'customers' => $customers,
-            'ordersitems' => $ordersitems
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'orders' => $orders,
+                'customers' => $customers,
+                'ordersitems' => $ordersitems
+            )
+        );
     }
-    private function CheckOrder(){
+    private function CheckOrder()
+    {
         $this->_articleManager = new ArticleManager;
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager();
@@ -95,18 +116,21 @@ class ControllerAccueil
         $articles = $this->_articleManager->getArticles();
         $orders = $this->_orderManager->getOrders();
         $customers = $this->_customerManager->getCustomers();
-        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $ordersitems = $this->_orderItemsManager->getOrderItems();
         $this->_view = new View('OrderAdmin');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'orders' => $orders,
-            'customers' => $customers,
-            'ordersitems' => $ordersitems
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'orders' => $orders,
+                'customers' => $customers,
+                'ordersitems' => $ordersitems
+            )
+        );
     }
 
 
-    private function OrderAdmin(){
+    private function OrderAdmin()
+    {
         $this->_articleManager = new ArticleManager;
         $this->_orderManager = new OrderManager;
         $this->_customerManager = new CustomerManager();
@@ -114,14 +138,16 @@ class ControllerAccueil
         $articles = $this->_articleManager->getArticles();
         $orders = $this->_orderManager->getOrders();
         $customers = $this->_customerManager->getCustomers();
-        $ordersitems=$this->_orderItemsManager->getOrderItems();
+        $ordersitems = $this->_orderItemsManager->getOrderItems();
         $this->_view = new View('OrderAdmin');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'orders' => $orders,
-            'customers' => $customers,
-            'ordersitems' => $ordersitems
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'orders' => $orders,
+                'customers' => $customers,
+                'ordersitems' => $ordersitems
+            )
+        );
     }
 
     private function articles()
@@ -133,10 +159,12 @@ class ControllerAccueil
         $categories = $this->_categorieManager->getCategories();
 
         $this->_view = new View('Accueil');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'categories' => $categories
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'categories' => $categories
+            )
+        );
     }
 
     private function articleCat()
@@ -147,10 +175,12 @@ class ControllerAccueil
         $categories = $this->_categorieManager->getCategories();
 
         $this->_view = new View('Accueil');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'categories' => $categories
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'categories' => $categories
+            )
+        );
     }
 
     private function product()
@@ -161,10 +191,12 @@ class ControllerAccueil
         $reviews = $this->_reviewManager->getReview($_GET['id']);
 
         $this->_view = new View('Product');
-        $this->_view->generate(array(
-            'articles' => $articles,
-            'reviews' => $reviews
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles,
+                'reviews' => $reviews
+            )
+        );
     }
 
     private function addToCart()
@@ -187,8 +219,10 @@ class ControllerAccueil
             array_push($_SESSION['panier'], [$_GET['cartArticleId'], 1]);
         }
         $this->_view = new View('Accueil');
-        $this->_view->generate(array(
-            'articles' => $articles
-        ));
+        $this->_view->generate(
+            array(
+                'articles' => $articles
+            )
+        );
     }
 }

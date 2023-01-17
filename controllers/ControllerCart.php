@@ -31,6 +31,8 @@ class ControllerCart
             $this->paymentChecked();
             unset($_SESSION['statuspanier']);
             unset($_SESSION['panier']);
+        } elseif (isset($_GET['invoice'])) {
+            $this->invoice();
         } else {
             $this->cart();
         }
@@ -158,6 +160,23 @@ class ControllerCart
                 'logins' => $logins,
                 'customers' => $customers,
                 'orders' => $orders,
+                'articles' => $articles
+            )
+        );
+    }
+    private function invoice()
+    {
+        $this->_articleManager = new ArticleManager;
+        $articles = $this->_articleManager->getArticles();
+        $this->_customerManager = new CustomerManager;
+        $customers = $this->_customerManager->getSpeCustomers();
+        $this->_loginManager = new LoginManager;
+        $logins = $this->_loginManager->getSpeLog();
+        $this->_view = new View('Invoice');
+        $this->_view->generate(
+            array(
+                'logins' => $logins,
+                'customers' => $customers,
                 'articles' => $articles
             )
         );

@@ -29,16 +29,17 @@ $this->_t = 'Mode de paiement';
                         <div class="d-inline-flex">
                             <div class="p-2">
                                 <p>
-                                    <a href="https://www.paypal.com/"><button type="button" class="btn btn-dark"><i
-                                                class="fab fa-paypal"></i> Se connecter à Paypal</button></a>
+                                    <a href="cart&payment=paypal"><button onclick="openPopup()" type="button"
+                                            class="btn btn-dark"><i class="fab fa-paypal"></i> Se connecter à
+                                            Paypal</button></a>
                                 </p>
                             </div>
-                            <div class="p-2">
-                                <p>
-                                    <a href="cart&payment=paypal"><button type="button" class="btn btn-dark">Valider cette
-                                            méthode de paiement</button></a>
-                                </p>
-                            </div>
+                            <script>
+                                function openPopup() {
+                                    window.open("https://www.paypal.com/signin", "Nom de la fenêtre", "height=500,width=500");
+                                }
+                            </script>
+
                         </div>
                         <p class="text-muted">
                             Remarque : En cliquant sur le bouton, vous serez redirigé sur la page Paypal pour passer au
@@ -53,19 +54,23 @@ $this->_t = 'Mode de paiement';
                             <div class="d-inline-flex">
                                 <div class="p-2">
                                     <p>
-                                        <button type="button" class="btn btn-dark">Télécharger la facture</button>
+                                        <a href="cart&invoice"><button type="button" class="btn btn-dark">Télécharger la
+                                                facture</button>
+                                        </a>
                                     </p>
                                 </div>
                                 <div class="p-2">
                                     <p>
-                                    <a href="cart&payment=cheque"><button type="button" class="btn btn-dark">Valider cette
-                                            méthode de paiement</button></a>
+                                        <a href="cart&payment=cheque"><button type="button" class="btn btn-dark">Valider
+                                                cette
+                                                méthode de paiement</button></a>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <p class="text-muted">
-                            Remarque : En cliquant sur le bouton, vous serez redirigé vers les commandes et vous validerez
+                            Remarque : En cliquant sur le bouton, vous serez redirigé vers les commandes et vous
+                            validerez
                             la méthode de paiement par chèque. </p>
                     </div>
                 </div>

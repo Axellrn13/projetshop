@@ -60,9 +60,9 @@ abstract class Model{
         $req->closeCursor();
     }
 
-    protected function updateQuantityArticle($id,$qty){
-        $req=self::$_bdd->prepare("update products set quantity=? where id=?;");
-        $req->execute(array($qty,$id));
+    protected function updateQuantityArticle($id,$qty,$description,$price){
+        $req=self::$_bdd->prepare("update products set quantity=?, description=?, price=? where id=?;");
+        $req->execute(array($qty,$description,$price,$id));
         $req->closeCursor();
     }
 

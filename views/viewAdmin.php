@@ -1,7 +1,9 @@
 <?php
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $_SESSION['qtyToModify'] = $_POST['qty'];
     $_SESSION['idToModify'] = $_POST['id'];
+    $_SESSION['descToModify'] = $_POST['description'];
+    $_SESSION['priceToModify'] = $_POST['price'];
     header("Location: accueil&modifyqty");
 }
 ?>
@@ -22,12 +24,21 @@ if(isset($_POST['submit'])){
                                 </h5>
                                 <?= $article->price(); ?>€
                             </div>
-
                             <form action="" method="post" autocomplete="off">
                                 <div class="form-group align-items-center mt-4">
                                     <label for="quantity">ID de l'article</label>
                                     <input type="number" readonly class="form-control" id="id" name="id"
                                         value="<?= $article->id(); ?>">
+                                </div>
+                                <div class="form-group align-items-center mt-4">
+                                    <label for="quantity">Description</label>
+                                    <textarea class="form-control" name="description"
+                                        rows="2"><?= $article->description(); ?></textarea>
+                                </div>
+                                <div class="form-group align-items-center mt-4">
+                                    <label for="quantity">Prix</label>
+                                    <input type="float" class="form-control" name="price" min=0
+                                        value="<?= $article->price(); ?>">
                                 </div>
                                 <div class="form-group align-items-center mt-4">
                                     <label for="quantity">Quantité</label>

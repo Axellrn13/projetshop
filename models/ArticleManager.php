@@ -17,7 +17,7 @@ class ArticleManager extends Model{
 
     public function updateQuantity(){
         $this->getBdd();
-        return $this->updateQuantityArticle($_SESSION['idToModify'],$_SESSION['qtyToModify']);
+        return $this->updateQuantityArticle($_SESSION['idToModify'],$_SESSION['qtyToModify'],$_SESSION['descToModify'],$_SESSION['priceToModify']);
     }
 }
 ?>

@@ -183,12 +183,25 @@ class ControllerCart
     }
     private function invoice()
     {
+        $this->_articleManager = new ArticleManager;
+        $articles = $this->_articleManager->getArticles();
+        $this->_deliveryAdressesManager = new Delivery_addressesManager;
         $this->_orderManager = new OrderManager;
         $orders = $this->_orderManager->getOrdersCustomer();
+        $this->_orderitemsManager = new OrderItemsManager;
+        $ordersitems = $this->_orderitemsManager->getOrderItems();
+        $this->_customerManager = new CustomerManager;
+        $customers = $this->_customerManager->getSpeCustomers();
+        $delivery_adresses = $this->_deliveryAdressesManager->getAdresses();
+        
         $this->_view = new View('Invoice');
         $this->_view->generatePDF(
             array(
-                'orders' => end($orders)
+                'orders' => end($orders),
+                'delivery_addresses' => $delivery_adresses,
+                'customers' => $customers,
+                'ordersitems' => $ordersitems,
+                'articles' => $articles
             )
         );
     }

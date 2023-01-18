@@ -2,7 +2,7 @@
 class Delivery_addressesManager extends Model{
     public function getAdresses(){
         $this->getBdd();
-        return $this->getAll('delivery_adresses', 'Delivery_adresses');
+        return $this->getAll('delivery_addresses', 'Delivery_addresses');
     }
 
     public function createAdress(){

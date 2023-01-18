@@ -10,7 +10,7 @@ $this->_t = 'Mode de paiement';
                     <!-- Credit card form tabs -->
                     <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
                         <li class="nav-item">
-                            <a data-toggle="pill" href="#paypal" class="nav-link bg-dark active"> <i
+                            <a data-toggle="pill" href="#paypal" class="nav-link active"> <i
                                     class="fab fa-paypal mr-2"></i> Paypal </a>
                         </li>
                         <li class="nav-item">
@@ -30,13 +30,16 @@ $this->_t = 'Mode de paiement';
                             <div class="p-2">
                                 <p>
                                     <a href="cart&payment=paypal"><button onclick="openPopup()" type="button"
-                                            class="btn btn-dark"><i class="fab fa-paypal"></i> Se connecter à
+                                            class="btn btn-primary"><i class="fab fa-paypal"></i> Se connecter à
                                             Paypal</button></a>
                                 </p>
                             </div>
                             <script>
                                 function openPopup() {
                                     window.open("https://www.paypal.com/signin", "Nom de la fenêtre", "height=500,width=500");
+                                }
+                                function openPopup2() {
+                                    window.open("cart&invoice", "Facture", "height=500,width=500");
                                 }
                             </script>
 
@@ -54,14 +57,14 @@ $this->_t = 'Mode de paiement';
                             <div class="d-inline-flex">
                                 <div class="p-2">
                                     <p>
-                                        <a href="cart&invoice"><button type="button" class="btn btn-dark">Télécharger la
+                                        <a href="cart&payment=cheque"><button onclick="openPopup2()" type="button" class="btn btn-primary">Télécharger la
                                                 facture</button>
                                         </a>
                                     </p>
                                 </div>
                                 <div class="p-2">
                                     <p>
-                                        <a href="cart&payment=cheque"><button type="button" class="btn btn-dark">Valider
+                                        <a href="cart&payment=cheque"><button type="button" class="btn btn-primary">Valider
                                                 cette
                                                 méthode de paiement</button></a>
                                     </p>
@@ -69,9 +72,7 @@ $this->_t = 'Mode de paiement';
                             </div>
                         </div>
                         <p class="text-muted">
-                            Remarque : En cliquant sur le bouton, vous serez redirigé vers les commandes et vous
-                            validerez
-                            la méthode de paiement par chèque. </p>
+                            Remarque : En cliquant sur la facture, vous choisissez de payer par chèque. </p>
                     </div>
                 </div>
             </div>

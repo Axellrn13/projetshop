@@ -73,10 +73,7 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                           endforeach; ?></h6>
                         </div>
                         <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                          <button class="btn btn-link px-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                            <i class="fas fa-minus"></i>
-                          </button>
+    
                           <?php foreach ($articles as $article):
                             if ($article->id() == $articlePanier[0]) {
                               $max = $article->quantity();
@@ -85,11 +82,6 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                           <input id="form1" min="0" id="quantity" name="quantity" onkeypress="return false" min="0"
                             max="<?= $max ?>" value="<?= $articlePanier[1] ?>" type="number"
                             class="form-control form-control-sm" />
-
-                          <button class="btn btn-link px-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                            <i class="fas fa-plus"></i>
-                          </button>
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                           <h6 class="mb-0">

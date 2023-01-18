@@ -1,79 +1,96 @@
 <?php
+
 ob_start();
+
 require_once('FPDF/fpdf.php');
 
-// Initialiser les valeurs ici
-// array -> libellé, qté, pu HT
-// client -> nom, adresse, codepostal, ville, pays (peut être "" par défaut)
-
-$pdf = new FPDF('P','mm','A4');
-
+$pdf = new FPDF( 'P', 'mm', 'A4' );
 $pdf->AddPage();
-/*output the result*/
+$pdf->SetFont('Arial','B',14);
 
-/*set font to arial, bold, 14pt*/
-$pdf->SetFont('Arial','B',20);
+//Cell(width , height , text , border , end line , [align] )
 
-/*Cell(width , height , text , border , end line , [align] )*/
+$pdf->Cell(130 ,5,'WEB4SHOP',0,0);
+$pdf->Cell(59 ,5,'Facture',0,1);//end of line
 
-$pdf->Cell(71 ,10,'',0,0);
-$pdf->Cell(59 ,5,'Test',0,0);
-$pdf->Cell(59 ,10,'',0,1);
+//set font to arial, regular, 12pt
+$pdf->SetFont('Arial','',12);
 
-$pdf->SetFont('Arial','B',15);
-$pdf->Cell(71 ,5,'WET',0,0);
-$pdf->Cell(59 ,5,'',0,0);
-$pdf->Cell(59 ,5,'Details',0,1);
+$pdf->Cell(130 ,5,'15 Bd André Latarjet',0,0);
+$pdf->Cell(59 ,5,'',0,1);//end of line
 
-$pdf->SetFont('Arial','',10);
+$pdf->Cell(130 ,5,'69100 Villeurbanne',0,0);
+$pdf->Cell(25 ,5,'Date',0,0);
+$pdf->Cell(34 ,5,date("Y-m-d"),0,1);//end of line
 
-$pdf->Cell(130 ,5,'Near DAV',0,0);
-$pdf->Cell(25 ,5,'Customer ID:',0,0);
-$pdf->Cell(34 ,5,$orders->customer_id(),0,1);
+$pdf->Cell(130 ,5,'0625136894',0,0);
+$pdf->Cell(25 ,5,'Facture n°',0,0);
+$pdf->Cell(34 ,5,random_int(1000000, 9999999),0,1);//end of line
 
-$pdf->Cell(130 ,5,'Delhi, 751001',0,0);
-$pdf->Cell(25 ,5,'Invoice Date:',0,0);
-$pdf->Cell(34 ,5,'12th Jan 2019',0,1);
- 
 $pdf->Cell(130 ,5,'',0,0);
-$pdf->Cell(25 ,5,'Invoice No:',0,0);
-$pdf->Cell(34 ,5,'ORD001',0,1);
+$pdf->Cell(25 ,5,'Numéro de client',0,0);
+$pdf->SetX($pdf->GetX() + 10);
+$pdf->Cell(40 ,5,$orders->customer_id(),0,1);//end of line
 
+//make a dummy empty cell as a vertical spacer
+$pdf->Cell(189 ,10,'',0,1);//end of line
 
-$pdf->SetFont('Arial','B',15);
-$pdf->Cell(130 ,5,'Bill To',0,0);
-$pdf->Cell(59 ,5,'',0,0);
-$pdf->SetFont('Arial','B',10);
-$pdf->Cell(189 ,10,'',0,1);
+//billing address
+$pdf->Cell(100 ,5,'Facture destinée à :',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);
 
+//add dummy cell at beginning of each line for indentation
+$pdf->Cell(10 ,5,'',0,0);
+$pdf->Cell(90 ,5,$customers[0]->surname()." ".$customers[0]->forname(),0,1);
+$pdf->Cell(10 ,5,'',0,0);
+$address;
+$phone;
+foreach($delivery_addresses as $del):
+    if($del->id() == $orders->delivery_add_id()){
+        $address = $del->add1();
+        $phone = $del->phone();
+    }
+endforeach;
+$pdf->Cell(90 ,5,$address,0,1);
 
+$pdf->Cell(10 ,5,'',0,0);
+$pdf->Cell(90 ,5,$phone,0,1);
 
-$pdf->Cell(50 ,10,'',0,1);
+//make a dummy empty cell as a vertical spacer
+$pdf->Cell(189 ,10,'',0,1);//end of line
 
-$pdf->SetFont('Arial','B',10);
-/*Heading Of the table*/
-$pdf->Cell(10 ,6,'Sl',1,0,'C');
-$pdf->Cell(80 ,6,'Description',1,0,'C');
-$pdf->Cell(23 ,6,'Qty',1,0,'C');
-$pdf->Cell(30 ,6,'Unit Price',1,0,'C');
-$pdf->Cell(20 ,6,'Sales Tax',1,0,'C');
-$pdf->Cell(25 ,6,'Total',1,1,'C');/*end of line*/
-/*Heading Of the table end*/
-$pdf->SetFont('Arial','',10);
-    for ($i = 0; $i <= 10; $i++) {
-		$pdf->Cell(10 ,6,$i,1,0);
-		$pdf->Cell(80 ,6,'HP Laptop',1,0);
-		$pdf->Cell(23 ,6,'1',1,0,'R');
-		$pdf->Cell(30 ,6,'15000.00',1,0,'R');
-		$pdf->Cell(20 ,6,'100.00',1,0,'R');
-		$pdf->Cell(25 ,6,'15100.00',1,1,'R');
-	}
-		
+//invoice contents
+$pdf->SetFont('Arial','B',12);
 
-$pdf->Cell(118 ,6,'',0,0);
-$pdf->Cell(25 ,6,'Subtotal',0,0);
-$pdf->Cell(45 ,6,'151000.00',1,1,'R');
+$pdf->Cell(130 ,5,'Articles',1,0);
+$pdf->Cell(25 ,5,'Prix unitaire',1,0);
+$pdf->Cell(34 ,5,'Quantité',1,1);//end of line
 
+$pdf->SetFont('Arial','',12);
+
+//Numbers are right-aligned so we give 'R' after new line parameter
+foreach ($ordersitems as $orderitem) :
+    if($orderitem->order_id() == $orders->id()){
+        foreach ($articles as $article):
+            if ($article->id() == $orderitem->product_id()) {
+                $pdf->Cell(130 ,5,$article->name(),1,0);
+                $pdf->Cell(25 ,5,$article->price().'€',1,0);
+                $pdf->Cell(34 ,5,$orderitem->quantity(),1,1,'R');
+            }
+        endforeach;
+    }
+endforeach;
+
+//summary
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,'Taux TVA',0,0);
+$pdf->Cell(4 ,5,'€',1,0);
+$pdf->Cell(30 ,5,'20%',1,1,'R');//end of line
+
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,'Total TTC',0,0);
+$pdf->Cell(4 ,5,'€',1,0);
+$pdf->Cell(30 ,5,$orders->total(),1,1,'R');//end of line
 
 $pdf->Output();
 

@@ -11,6 +11,7 @@ class ControllerCart
     private $_orderitemsManager;
     private $_customerManager;
     private $_deliveryAdressesManager;
+    private $_adminManager;
 
 
     public function __construct($url)
@@ -44,25 +45,41 @@ class ControllerCart
         $this->_loginManager = new LoginManager;
         $this->_customerManager = new CustomerManager;
         $this->_orderManager = new OrderManager;
-        $articles = $this->_articleManager->getArticles();
-        $logins = $this->_loginManager->getSpeLog();
-        $customers = $this->_customerManager->getSpeCustomers();
-        $orders = $this->_orderManager->getOrdersCustomer();
-        if (isset($_SESSION['statuspanier']) && $_SESSION['statuspanier'] == 2) {
-            $this->_view = new View('CartPay');
-        $this->_view->generate(
-            array(
-                'logins' => $logins,
-                'customers' => $customers,
-                'orders' => $orders,
-                'articles' => $articles
-            )
-        );
+        $this->_adminManager = new AdminManager;
+        if (isset($_SESSION['customer_id'])) {
+            $articles = $this->_articleManager->getArticles();
+            $logins = $this->_loginManager->getSpeLog();
+            $customers = $this->_customerManager->getSpeCustomers();
+            $orders = $this->_orderManager->getOrdersCustomer();
+            if (isset($_SESSION['statuspanier']) && $_SESSION['statuspanier'] == 2) {
+
+                $this->_view = new View('CartPay');
+                $this->_view->generate(
+                    array(
+                        'logins' => $logins,
+                        'customers' => $customers,
+                        'orders' => $orders,
+                        'articles' => $articles
+                    )
+                );
+            } else {
+                $this->_view = new View('Cart');
+                $this->_view->generate(
+                    array(
+                        'articles' => $articles
+                    )
+                );
+            }
         } else {
-            $this->_view = new View('Cart');
+            $logins = $this->_loginManager->getLog();
+            $admin = $this->_adminManager->getAdmin();
+            $customers = $this->_customerManager->getCustomers();
+            $this->_view = new View('LoginCart');
             $this->_view->generate(
                 array(
-                    'articles' => $articles
+                    'logins' => $logins,
+                    'customers' => $customers,
+                    'admin' => $admin
                 )
             );
         }
@@ -166,22 +183,14 @@ class ControllerCart
     }
     private function invoice()
     {
-        $this->_articleManager = new ArticleManager;
-        $articles = $this->_articleManager->getArticles();
-        $this->_customerManager = new CustomerManager;
-        $customers = $this->_customerManager->getSpeCustomers();
-        $this->_loginManager = new LoginManager;
-        $logins = $this->_loginManager->getSpeLog();
+        $this->_orderManager = new OrderManager;
+        $orders = $this->_orderManager->getOrdersCustomer();
         $this->_view = new View('Invoice');
-        $this->_view->generate(
+        $this->_view->generatePDF(
             array(
-                'logins' => $logins,
-                'customers' => $customers,
-                'articles' => $articles
+                'orders' => end($orders)
             )
         );
     }
 }
-
-
 ?>

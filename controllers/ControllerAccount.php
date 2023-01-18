@@ -56,8 +56,8 @@ class ControllerAccount{
         $logins=$this->_loginManager->getSpeLog();
         $customers=$this->_customerManager->getSpeCustomers();
         $orders=$this->_orderManager->getOrdersCustomer();
-        $ordersitems=$this->_orderitemsManager->getOrderItems();
         $articles=$this->_articleManager->getArticles();
+        $ordersitems=$this->_orderitemsManager->getOrderItems();
         $this->_view = new View('Orders');
         $this->_view->generate(array(
             'logins' => $logins,

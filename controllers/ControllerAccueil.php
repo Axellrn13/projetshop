@@ -1,6 +1,8 @@
 <?php
 
 require_once('views/View.php');
+require_once('FPDF/fpdf.php');
+
 class ControllerAccueil
 {
     private $_articleManager;

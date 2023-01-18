@@ -1,102 +1,80 @@
 <?php
-// (c) Xavier Nicolay
-// Exemple de génération de devis/facture PDF
+ob_start();
+require_once('FPDF/fpdf.php');
 
-require('invoice.php');
+// Initialiser les valeurs ici
+// array -> libellé, qté, pu HT
+// client -> nom, adresse, codepostal, ville, pays (peut être "" par défaut)
 
-$pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
+$pdf = new FPDF('P','mm','A4');
+
 $pdf->AddPage();
-$pdf->addSociete( "MaSociete",
-                  "MonAdresse\n" .
-                  "75000 PARIS\n".
-                  "R.C.S. PARIS B 000 000 007\n" .
-                  "Capital : 18000 " . EURO );
-$pdf->fact_dev( "Devis ", "TEMPO" );
-$pdf->temporaire( "Devis temporaire" );
-$pdf->addDate( "03/12/2003");
-$pdf->addClient("CL01");
-$pdf->addPageNumber("1");
-$pdf->addClientAdresse("Ste\nM. XXXX\n3ème étage\n33, rue d'ailleurs\n75000 PARIS");
-$pdf->addReglement("Chèque à réception de facture");
-$pdf->addEcheance("03/12/2003");
-$pdf->addNumTVA("FR888777666");
-$pdf->addReference("Devis ... du ....");
-$cols=array( "REFERENCE"    => 23,
-             "DESIGNATION"  => 78,
-             "QUANTITE"     => 22,
-             "P.U. HT"      => 26,
-             "MONTANT H.T." => 30,
-             "TVA"          => 11 );
-$pdf->addCols( $cols);
-$cols=array( "REFERENCE"    => "L",
-             "DESIGNATION"  => "L",
-             "QUANTITE"     => "C",
-             "P.U. HT"      => "R",
-             "MONTANT H.T." => "R",
-             "TVA"          => "C" );
-$pdf->addLineFormat( $cols);
-$pdf->addLineFormat($cols);
+/*output the result*/
 
-$y    = 109;
-$line = array( "REFERENCE"    => "REF1",
-               "DESIGNATION"  => "Carte Mère MSI 6378\n" .
-                                 "Processeur AMD 1Ghz\n" .
-                                 "128Mo SDRAM, 30 Go Disque, CD-ROM, Floppy, Carte vidéo",
-               "QUANTITE"     => "1",
-               "P.U. HT"      => "600.00",
-               "MONTANT H.T." => "600.00",
-               "TVA"          => "1" );
-$size = $pdf->addLine( $y, $line );
-$y   += $size + 2;
+/*set font to arial, bold, 14pt*/
+$pdf->SetFont('Arial','B',20);
 
-$line = array( "REFERENCE"    => "REF2",
-               "DESIGNATION"  => "Câble RS232",
-               "QUANTITE"     => "1",
-               "P.U. HT"      => "10.00",
-               "MONTANT H.T." => "60.00",
-               "TVA"          => "1" );
-$size = $pdf->addLine( $y, $line );
-$y   += $size + 2;
+/*Cell(width , height , text , border , end line , [align] )*/
 
-$pdf->addCadreTVAs();
-        
-// invoice = array( "px_unit" => value,
-//                  "qte"     => qte,
-//                  "tva"     => code_tva );
-// tab_tva = array( "1"       => 19.6,
-//                  "2"       => 5.5, ... );
-// params  = array( "RemiseGlobale" => [0|1],
-//                      "remise_tva"     => [1|2...],  // {la remise s'applique sur ce code TVA}
-//                      "remise"         => value,     // {montant de la remise}
-//                      "remise_percent" => percent,   // {pourcentage de remise sur ce montant de TVA}
-//                  "FraisPort"     => [0|1],
-//                      "portTTC"        => value,     // montant des frais de ports TTC
-//                                                     // par defaut la TVA = 19.6 %
-//                      "portHT"         => value,     // montant des frais de ports HT
-//                      "portTVA"        => tva_value, // valeur de la TVA a appliquer sur le montant HT
-//                  "AccompteExige" => [0|1],
-//                      "accompte"         => value    // montant de l'acompte (TTC)
-//                      "accompte_percent" => percent  // pourcentage d'acompte (TTC)
-//                  "Remarque" => "texte"              // texte
-$tot_prods = array( array ( "px_unit" => 600, "qte" => 1, "tva" => 1 ),
-                    array ( "px_unit" =>  10, "qte" => 1, "tva" => 1 ));
-$tab_tva = array( "1"       => 19.6,
-                  "2"       => 5.5);
-$params  = array( "RemiseGlobale" => 1,
-                      "remise_tva"     => 1,       // {la remise s'applique sur ce code TVA}
-                      "remise"         => 0,       // {montant de la remise}
-                      "remise_percent" => 10,      // {pourcentage de remise sur ce montant de TVA}
-                  "FraisPort"     => 1,
-                      "portTTC"        => 10,      // montant des frais de ports TTC
-                                                   // par defaut la TVA = 19.6 %
-                      "portHT"         => 0,       // montant des frais de ports HT
-                      "portTVA"        => 19.6,    // valeur de la TVA a appliquer sur le montant HT
-                  "AccompteExige" => 1,
-                      "accompte"         => 0,     // montant de l'acompte (TTC)
-                      "accompte_percent" => 15,    // pourcentage d'acompte (TTC)
-                  "Remarque" => "Avec un acompte, svp..." );
+$pdf->Cell(71 ,10,'',0,0);
+$pdf->Cell(59 ,5,'Test',0,0);
+$pdf->Cell(59 ,10,'',0,1);
 
-$pdf->addTVAs( $params, $tab_tva, $tot_prods);
-$pdf->addCadreEurosFrancs();
+$pdf->SetFont('Arial','B',15);
+$pdf->Cell(71 ,5,'WET',0,0);
+$pdf->Cell(59 ,5,'',0,0);
+$pdf->Cell(59 ,5,'Details',0,1);
+
+$pdf->SetFont('Arial','',10);
+
+$pdf->Cell(130 ,5,'Near DAV',0,0);
+$pdf->Cell(25 ,5,'Customer ID:',0,0);
+$pdf->Cell(34 ,5,$orders->customer_id(),0,1);
+
+$pdf->Cell(130 ,5,'Delhi, 751001',0,0);
+$pdf->Cell(25 ,5,'Invoice Date:',0,0);
+$pdf->Cell(34 ,5,'12th Jan 2019',0,1);
+ 
+$pdf->Cell(130 ,5,'',0,0);
+$pdf->Cell(25 ,5,'Invoice No:',0,0);
+$pdf->Cell(34 ,5,'ORD001',0,1);
+
+
+$pdf->SetFont('Arial','B',15);
+$pdf->Cell(130 ,5,'Bill To',0,0);
+$pdf->Cell(59 ,5,'',0,0);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(189 ,10,'',0,1);
+
+
+
+$pdf->Cell(50 ,10,'',0,1);
+
+$pdf->SetFont('Arial','B',10);
+/*Heading Of the table*/
+$pdf->Cell(10 ,6,'Sl',1,0,'C');
+$pdf->Cell(80 ,6,'Description',1,0,'C');
+$pdf->Cell(23 ,6,'Qty',1,0,'C');
+$pdf->Cell(30 ,6,'Unit Price',1,0,'C');
+$pdf->Cell(20 ,6,'Sales Tax',1,0,'C');
+$pdf->Cell(25 ,6,'Total',1,1,'C');/*end of line*/
+/*Heading Of the table end*/
+$pdf->SetFont('Arial','',10);
+    for ($i = 0; $i <= 10; $i++) {
+		$pdf->Cell(10 ,6,$i,1,0);
+		$pdf->Cell(80 ,6,'HP Laptop',1,0);
+		$pdf->Cell(23 ,6,'1',1,0,'R');
+		$pdf->Cell(30 ,6,'15000.00',1,0,'R');
+		$pdf->Cell(20 ,6,'100.00',1,0,'R');
+		$pdf->Cell(25 ,6,'15100.00',1,1,'R');
+	}
+		
+
+$pdf->Cell(118 ,6,'',0,0);
+$pdf->Cell(25 ,6,'Subtotal',0,0);
+$pdf->Cell(45 ,6,'151000.00',1,1,'R');
+
+
 $pdf->Output();
+
 ?>

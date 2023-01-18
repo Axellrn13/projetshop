@@ -18,6 +18,16 @@ class View{
 
         echo $view;
     }
+
+    public function generatePDF($data){
+        $content = $this->generateFile($this->_file, $data);
+
+        $view = $this->generateFile('views/templatePDF.php', array(
+        'description' => $content));
+
+        echo $view;
+    }
+
     private function generateFile($file,$data){
         if (file_exists($file)) {
             extract($data);

@@ -8,6 +8,11 @@ class OrderManager extends Model{
         $this->getBdd();
         return $this->getSpeValue('orders', 'Order','customer_id',$_SESSION['customer_id']);
     }
+
+    public function getLastOrderCustomer(){
+        $this->getBdd();
+        return $this->getSpeValue('orders', 'Order','customer_id',$_SESSION['customer_id']);
+    }
     public function createOneOrder($total){
         $this->getBdd();
         $isRegistered = 0;

@@ -85,8 +85,9 @@ abstract class Model{
         $req=self::$_bdd->prepare("SET @orderid = (select max(id) from orders);
         insert into orderitems (order_id, product_id, quantity) 
         values (@orderid,?,?);
+        update products set quantity = quantity - ? where id=?;
         ");
-        $req->execute(array($product_id, $quantity));
+        $req->execute(array($product_id, $quantity,$quantity,$product_id));
         $req->closeCursor();
     }
 

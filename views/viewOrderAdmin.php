@@ -1,3 +1,5 @@
+<?php if ($_SESSION['admin'] == true) {?>
+
 <section class="py-5">
     <div class="container px-4 px-lg-2 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4">
@@ -100,3 +102,15 @@
         </div>
     </div>
 </section>
+<?php } else { ?>
+    <div class="d-flex align-items-center justify-content-center mt-5">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">404</h1>
+                <p class="fs-3"> <span class="text-danger">Oops!</span> Page introuvable.</p>
+                <p class="lead">
+                    La page que vous cherchez actuellement n'existe pas.
+                  </p>
+                <a href="accueil" class="btn btn-dark">Retourner à l'accueil</a>
+            </div>
+        </div>
+<?php }?>

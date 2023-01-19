@@ -6,7 +6,8 @@ if (isset($_POST['submit'])) {
     $_SESSION['priceToModify'] = $_POST['price'];
     header("Location: accueil&modifyqty");
 }
-?>
+if ($_SESSION['admin'] == true) {
+    ?>
 <section class="py-5">
     <div class="container px-1 px-lg-5 mt-5">
         <addressdiv class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -57,3 +58,7 @@ if (isset($_POST['submit'])) {
     </div>
     </div>
 </section>
+<?php } else { ?>
+
+
+<?php }?>

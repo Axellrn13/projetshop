@@ -6,6 +6,9 @@ class Router
     private $_ctrl;
     private$_view;
 
+    // le routeur permet ici d'aller sur l'accueil par défaut, et d'accéder au controlleur à partir du nom de celui ci, 
+    // par exemple : si on entre en url : http://localhost/projetshop/cart on accèdera au ControlleurCart qui par défaut renverra sur la fonction cart() dans le controlleur
+    // et il permet également d'afficher une page d'erreur si le controlleur en question n'existe pas
     public function routeReq()
     {
         try

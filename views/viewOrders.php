@@ -85,6 +85,8 @@ foreach ($orders as $order) {
                   <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Choisir mode de paiement</div>
                 <?php } elseif ($order->status() == 10) { ?>
                   <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Commande envoyé<em></em></div>
+                  <?php } elseif ($order->status() == -1) { ?>
+                  <div class="progress-bar" role="progressbar" style="width: 100%; background-color:red;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Commande annulé<em></em></div>
                 <?php } else { ?>
                   <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Préparation de votre commande</div>
                 <?php } ?>

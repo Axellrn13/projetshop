@@ -15,19 +15,23 @@ class ControllerAccount
     {
         if (isset($url) && count(array($url)) > 1) {
             throw new Exception('Page introuvable');
-        } elseif (isset($_GET['update'])) {
+        } elseif (isset($_GET['update'])) { // quand le client change des infos de son compte
             $this->updateAccount();
-        } elseif (isset($_GET['updateAdress'])) {
+        } elseif (isset($_GET['updateAdress'])) { // s'il modifie son adresse on agit sur la table delivery_adresses
             $this->updateAdress();
-        } elseif (isset($_GET['order'])) {
+        } elseif (isset($_GET['order'])) { // accéder à ses commandes
             $this->accountOrder();
-        } elseif (isset($_GET['id'])) {
+        } elseif (isset($_GET['id'])) { // accéder à la facture portant l'id de la variable GET
             $this->factureId();
         } else {
-            $this->account();
+            $this->account(); // accéder à la vue des infos du compte
         }
     }
 
+ // les fonctions qui suivent permettent d'afficher les différentes vues décrites précédemment, exemple, pour afficher la vue du compte
+ // on fera appel à la fonction account()
+ // dans ces fonctions, on établit un Manager, pour accéder à toutes les données de la table que l'on souhaite
+ // puis lors de la création de la vue on dit quelles variables on veut avoir à disposition dans la vue
     private function factureId()
     {
         $this->_articleManager = new ArticleManager;

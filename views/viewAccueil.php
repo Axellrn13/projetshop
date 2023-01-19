@@ -1,4 +1,9 @@
 <?php
+if (!isset($_SESSION['admin'])) {
+    // La variable de session n'existe pas
+    // On la crée et on lui affecte une valeur par défaut
+    $_SESSION['admin'] = false;
+}
 if (!isset($_SESSION['panier'])) {
     // La variable de session n'existe pas
     // On la crée et on lui affecte une valeur par défaut

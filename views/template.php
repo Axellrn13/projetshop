@@ -40,45 +40,53 @@
                     <?php
                     if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) { ?>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Administration
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Administration
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
-                            <a class="dropdown-item" href="accueil&order">Gérer les commandes</a>
-                            <a class="dropdown-item" href="accueil&admin">Gérer les articles</a>
+                                <a class="dropdown-item" href="accueil&order">Gérer les commandes</a>
+                                <a class="dropdown-item" href="accueil&admin">Gérer les articles</a>
                             </div>
                         </li>
-                        <?php } ?>
+                    <?php } ?>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <?php if ($_SESSION['admin'] != true) {
 
                         if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != []) { ?>
-                    <li class="nav-item position-relative">
-                        <a class="nav-link" href="cart">Panier
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <?= $_SESSION['nbArticle']; ?>
-                        </span></a>
-                    </li>
-                    <?php } else { ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart">Panier</a>
-                        </li>
-                    <?php }
-                    }?>
+                            <li class="nav-item position-relative">
+                                <a class="nav-link" href="cart">Panier
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        <?= $_SESSION['nbArticle']; ?>
+                                    </span></a>
+                            </li>
+                        <?php } else { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="cart">Panier</a>
+                            </li>
+                        <?php }
+                    } ?>
                     <?php
-                    if (isset($_SESSION['username'])) { ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <?= $_SESSION['username']; ?>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
-                                <li><a class="dropdown-item" href="account">Votre compte</a></li>
-                            </ul>
-                        </li>
-                        <?php
+                    if (isset($_SESSION['username'])) {
+                        if ($_SESSION['admin'] != true) { ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?= $_SESSION['username']; ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="account&order">Vos commandes</a></li>
+                                    <li><a class="dropdown-item" href="account">Votre compte</a></li>
+                                </ul>
+                            </li>
+                            <?php
+                        } else { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Admin</a>
+                            </li>
+                        <?php }
                     } else { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="login">

@@ -10,7 +10,9 @@ if (!isset($_SESSION['statuspanier'])) {
   $_SESSION['statuspanier'] = 0;
 }
 
-foreach ($orders as $order) { ?>
+foreach ($orders as $order) {
+  $payment_type = $order->payment_type();
+?>
 
   <section class="h-100 h-custom" style="background-color: #eee;">
     <div class="container py-5 h-100">
@@ -62,6 +64,7 @@ foreach ($orders as $order) { ?>
 
 
               <div class="row my-4 ">
+                <?php if($payment_type == 'cheque'){ ?>
                 <div class="col mt-4">
                   <p class="lead fw-bold mb-0" style="color: #212529;">
                   <?php $id = $order->id();?>
@@ -70,6 +73,7 @@ foreach ($orders as $order) { ?>
                     </button></a>
                   </p>
                 </div>
+                <?php } ?>
                 <div class="col-md-4 offset-md-8 col-lg-5 offset-lg-9">
                   <p class="lead fw-bold mb-0" style="color: #212529;">Total : <?= $order->total() ?> €</p>
                 </div>

@@ -51,7 +51,9 @@
                         <?php } ?>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <?php if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != [])  { ?>
+                    <?php if ($_SESSION['admin'] != true) {
+
+                        if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['panier'] != []) { ?>
                     <li class="nav-item position-relative">
                         <a class="nav-link" href="cart">Panier
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -62,7 +64,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="cart">Panier</a>
                         </li>
-                    <?php } ?>
+                    <?php }
+                    }?>
                     <?php
                     if (isset($_SESSION['username'])) { ?>
                         <li class="nav-item dropdown">

@@ -65,8 +65,8 @@ foreach ($orders as $order) { ?>
                 <div class="col mt-4">
                   <p class="lead fw-bold mb-0" style="color: #212529;">
                   <?php $id = $order->id();?>
-                    <a href="<?php echo "order&id=".$id; ?>"><button name="submit" type="submit" class="btn btn-primary ">
-                      Plus de détails
+                    <a href="<?php echo "account&id=".$id; ?>"><button name="submit" type="submit" class="btn btn-primary ">
+                      Accéder à la facture
                     </button></a>
                   </p>
                 </div>

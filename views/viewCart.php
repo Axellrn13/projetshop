@@ -79,8 +79,7 @@ if (isset($_SESSION['panier']) && isset($_SESSION['nbArticle']) && $_SESSION['pa
                               $max = $article->quantity();
                             }
                           endforeach; ?>
-                          <input id="form1" min="0" id="quantity" name="quantity" onkeypress="return false" min="0"
-                            max="<?= $max ?>" value="<?= $articlePanier[1] ?>" type="number"
+                          <input id="form1" min="0" id="quantity" name="quantity" readonly value="<?= $articlePanier[1] ?>" type="number"
                             class="form-control form-control-sm" />
                         </div>
                         <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">

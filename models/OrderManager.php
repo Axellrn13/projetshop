@@ -9,9 +9,9 @@ class OrderManager extends Model{
         return $this->getSpeValue('orders', 'Order','customer_id',$_SESSION['customer_id']);
     }
 
-    public function getLastOrderCustomer(){
+    public function getOrdersWithID($id){
         $this->getBdd();
-        return $this->getSpeValue('orders', 'Order','customer_id',$_SESSION['customer_id']);
+        return $this->getValue('orders','Order',$id);
     }
     public function createOneOrder($total){
         $this->getBdd();

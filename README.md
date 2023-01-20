@@ -29,4 +29,15 @@ En utilisant cette architecture, nous sommes en mesure de séparer les différen
 * HTML, CSS, et Bootstrap pour la mise en forme et la mise en page
 
 
+## Conseil lors de la création de la BDD : 
+* ajouter un user “admin” avec le mdp que vous voulez pour faciliter l’accès la vue administration pour effectuer les test
+
+## Problèmes rencontrés et solutions mises en oeuvre 
+
+* Lors de la génération du pdf, on l'effectue dans une vue, or la création du vue entraîne la génération du template contenant le header et le footer donc il y avait une erreur, ainsi on a créer un deuxième template contenant seulement le contenu de la vue, ce qui affiche bien le pdf de la facture.
+* Par souci de sécurité et que le client soit “perdu” avec une commande, nous avons préféré faire le choix de laisser une personne non connecté d’ajouter des articles à son panier, mais si elle veut passer à son panier elle doit forcément se connecter ou créer un compte. C’est d’ailleurs une fonctionnalité que l’on retrouve chez Amazon.
+
+
+
+
 

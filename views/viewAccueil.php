@@ -15,8 +15,8 @@ if (!isset($_SESSION['statuspanier'])) {
     $_SESSION['statuspanier'] = 0;
 }
 $nbArticle = 0;
-foreach($_SESSION['panier'] as $articlePanier): 
-    $nbArticle = $nbArticle + $articlePanier[1];
+foreach($_SESSION['panier'] as $articlePanier): // calculer le nombre d'article dans le panier
+    $nbArticle = $nbArticle + $articlePanier[1]; //
     $_SESSION['nbArticle'] = $nbArticle;
   
   endforeach;

@@ -21,7 +21,7 @@ class ControllerAccount
             $this->updateAdress();
         } elseif (isset($_GET['order'])) { // accéder à ses commandes
             $this->accountOrder();
-        } elseif (isset($_GET['id'])) { // accéder à la facture portant l'id de la variable GET
+        } elseif (isset($_GET['id'])) { // accéder à la facture de la commande portant l'id de la variable GET
             $this->factureId();
         } else {
             $this->account(); // accéder à la vue des infos du compte

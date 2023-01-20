@@ -1,4 +1,6 @@
 <?php
+//lorsqu'on se déconnecte on détruit la session pour pouvoir réinitialiser toutes les variables de session
+
   // Initialiser la session
   session_start();
   

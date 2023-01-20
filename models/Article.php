@@ -1,4 +1,7 @@
 <?php 
+
+// Ce model est une entité faisant référence aux tables de la BD, c'est la méthode hydrate() qui récupère les valeurs de la table et les met dans les différentes _variables 
+// portant le nom exacte des variables de la tables à l'aide des setters
 class Article {
     private $_id;
     private $_name;
